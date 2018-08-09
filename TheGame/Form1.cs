@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TetrisUI;
-using Type = System.Type;
 
 namespace TheGame
 {
@@ -18,21 +17,10 @@ namespace TheGame
     {
         public List<Shape> Shapes { get; } = new List<Shape>();
 
-        public delegate void GameUpdatedEventHandler(object source, EventArgs args);
-        public event GameUpdatedEventHandler GameUpdated;
-
-        protected virtual void OnGameUpdated()
-        {
-            if (GameUpdated != null)
-            {
-                GameUpdated(this, EventArgs.Empty);
-            }
-        }
-
         public Form1() : base(1000)
         {
-            Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Zero, ShapeColor.Cyan, 0, 0));
-            Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Ninety, ShapeColor.Red, 0, 0));
+            Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Zero, 0, 0));
+            //Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Ninety, 0, 0));
         }
 
         protected override void UpdateGame()
@@ -43,46 +31,12 @@ namespace TheGame
             }
         }
 
-        protected void UpdateGame(IRender render)
-        {
-            MessageBox.Show("sda");
-            //OnGameUpdated();
-            //shape.YPosition++;
-            //Render(shapeI);
-            //shapeI.Draw(render);
-            //UpdatePosition();
-            //throw new NotImplementedException();
-        }
-
-        protected void UpdatePosition(IRender render, Shape shapeI)
-        {
-            MessageBox.Show("hej");
-            shapeI.YPosition++;
-            shapeI.Draw(render);
-            UpdateGame();
-        }
-
-        protected void MoveDownInSpeedOfGame(object source, EventArgs args)
-        {
-            //shapeI.YPosition++;
-        }
         protected override void Render(IRender render)
         {
             foreach (var shape in Shapes)
             {
                 shape.Draw(render);
             }
-
-            //var i = 10;
-            //render.Draw(3, 3 + i, ShapeColor.Cyan);
-            //render.Draw(3, 4 + i, ShapeColor.Cyan);
-            //render.Draw(3, 5 + i, ShapeColor.Cyan);
-            //render.Draw(3, 6 + i, ShapeColor.Cyan);
-
-            //render.Draw(3, 0, ShapeColor.Cyan);
-            //render.Draw(4, 0, ShapeColor.Cyan);
-            //render.Draw(5, 0, ShapeColor.Cyan);
-            //render.Draw(6, 0, ShapeColor.Cyan);
 
             //render.Draw(0, 1, ShapeColor.Orange);
             //render.Draw(1, 1, ShapeColor.Orange);
@@ -122,20 +76,30 @@ namespace TheGame
 
         protected override void Drop()
         {
-            throw new NotImplementedException("Drop");
+            CreateShape();
+            //throw new NotImplementedException("Drop");
         }
 
         protected override void MoveLeft()
         {
-            
-            throw new NotImplementedException("Left");
+            foreach (var shape in Shapes)
+            {
+                shape.XPosition--;
+            }
         }
 
         protected override void MoveRight()
         {
-            var shape = new Shape();
-            shape.XPosition++;
+            foreach (var shape in Shapes)
+            {
+                shape.XPosition++;
+            }
             //throw new NotImplementedException("Right");
+        }
+
+        protected void CreateShape()
+        {
+            Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Zero, 0, 0));
         }
     }
 }

@@ -34,11 +34,10 @@ namespace TheGame
         {
         }
 
-        public Shape(ShapeType type, ShapeRotation rotation, ShapeColor color, int xPosition, int yPosition)
+        public Shape(ShapeType type, ShapeRotation rotation, int xPosition, int yPosition)
         {
             Type = type;
             Rotation = rotation;
-            Color = color;
             XPosition = xPosition;
             YPosition = yPosition;
         }
