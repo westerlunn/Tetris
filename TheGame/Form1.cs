@@ -19,7 +19,7 @@ namespace TheGame
 
         public Form1() : base(1000)
         {
-            Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Zero, 0, 0));
+            Shapes.Add(new ShapeI(0, 0, ShapeRotation.Zero)); //ShapeType.I, 
             //Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Ninety, 0, 0));
         }
 
@@ -27,7 +27,11 @@ namespace TheGame
         {
             foreach (var shape in Shapes)
             {
+                if (shape.YPosition < 18)
+                {
                 shape.YPosition++;
+
+                }
             }
         }
 
@@ -37,32 +41,7 @@ namespace TheGame
             {
                 shape.Draw(render);
             }
-
-            //render.Draw(0, 1, ShapeColor.Orange);
-            //render.Draw(1, 1, ShapeColor.Orange);
-            //render.Draw(2, 1, ShapeColor.Orange);
-            //render.Draw(2, 0, ShapeColor.Orange);
-
-            //render.Draw(3, 8, ShapeColor.Blue);
-            //render.Draw(3, 9, ShapeColor.Blue);
-            //render.Draw(4, 9, ShapeColor.Blue);
-            //render.Draw(5, 9, ShapeColor.Blue);
             
-            //render.Draw(9,19, ShapeColor.Red);
-
-            //var shapeI = new Shape(ShapeType.I, ShapeRotation.Zero, ShapeColor.Cyan, 0, 0);
-            //var shapeI90 = new Shape(ShapeType.I, ShapeRotation.Ninety, ShapeColor.Cyan, 0, 0);
-            //var shapeI180 = new Shape(ShapeType.I, ShapeRotation.OneEighty, ShapeColor.Cyan, 0, 0);
-            //var shapeI270 = new Shape(ShapeType.I, ShapeRotation.TwoSeventy, ShapeColor.Cyan, 0, 0);
-            //shapeI.XPosition++;
-            //shapeI.YPosition++;
-            //shapeI.Draw(render);
-            //shapeI90.Draw(render);
-            //shapeI180.Draw(render);
-            //UpdatePosition(render, shapeI);
-            //GameUpdated += MoveDownInSpeedOfGame;
-            
-            //shapeI270.Draw(render);
             //throw new NotImplementedException();
         }
 
@@ -70,7 +49,10 @@ namespace TheGame
         {
             foreach (var shape in Shapes)
             {
-                shape.Rotate();
+                if(shape is RotatableShape rotatableShape)
+                {
+                    rotatableShape.Rotate();
+                }
             }
         }
 
@@ -99,7 +81,8 @@ namespace TheGame
 
         protected void CreateShape()
         {
-            Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Zero, 0, 0));
+            Shapes.Add(new ShapeI(0, 0, ShapeRotation.Ninety));
+            //Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Zero, 0, 0));
         }
     }
 }
