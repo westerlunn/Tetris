@@ -40,5 +40,11 @@ namespace TheGame
             render.Draw(XPosition + 4, YPosition + 2, ShapeColor.Cyan);
             render.Draw(XPosition + 4, YPosition + 3, ShapeColor.Cyan);
         }
+
+        public Boolean[,] ShapeGrid = new bool[,]
+        {
+            {false, true},
+            {true, false}
+        };
     }
 }

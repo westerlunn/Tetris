@@ -17,7 +17,20 @@ namespace TheGame
     {
         public List<Shape> Shapes { get; } = new List<Shape>();
 
-        public Form1() : base(1000)
+        public bool[,] ShapeGrid = new bool[3,3]
+        {
+            {false, true, false},
+            {false, false, false},
+            {false, true, false }
+        };
+
+
+        //public Boolean[,] Grid = new bool[,]
+        //    {
+        //    {0, 0} = true,
+        //};
+
+public Form1() : base(1000)
         {
             Shapes.Add(new ShapeI(0, 0, ShapeRotation.Zero)); //ShapeType.I, 
             //Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Ninety, 0, 0));
@@ -37,11 +50,31 @@ namespace TheGame
 
         protected override void Render(IRender render)
         {
-            foreach (var shape in Shapes)
-            {
-                shape.Draw(render);
-            }
+            //foreach (var shape in Shapes)
+            //{
+            //    shape.Draw(render);
+            //}
             
+
+            var boolArray = new[,]
+            {
+                {true, false},
+                {false, true}
+            };
+
+            var newBool = boolArray[1, 1];
+
+            for (var y = 0; y < boolArray.GetLength(1); y++)
+            {
+                for (var x = 0; x < boolArray.GetLength(0); x++)
+                {
+                    if (boolArray[x, y])
+                    {
+                        render.Draw(x, y, ShapeColor.Orange);
+                    }
+                }
+            }
+
             //throw new NotImplementedException();
         }
 
