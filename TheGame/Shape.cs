@@ -10,8 +10,9 @@ namespace TheGame
         //public ShapeRotation Rotation { get; set; }
         public int XPosition { get; set; }
         public int YPosition { get; set; }
+        public bool[,] ShapeGrid { get; set; }
         
-        protected Shape(int xPosition, int yPosition)
+        protected Shape(int xPosition, int yPosition) //, bool[,] shapeGrid
         {
             //Type = type; ShapeType type,
             //Rotation = rotation;
@@ -19,7 +20,21 @@ namespace TheGame
             YPosition = yPosition;
         }
 
-        public abstract void Draw(IRender render);
+        public abstract void Draw(IRender render); //, bool[,] shapeGrid
+
+        public void DrawShapeGrid(IRender render, bool[,] shapeGrid, ShapeColor color) //, int xPos, int yPos
+        {
+            for (var y = 0; y < shapeGrid.GetLength(1); y++)
+            {
+                for (var x = 0; x < shapeGrid.GetLength(0); x++)
+                {
+                    if (shapeGrid[y, x])
+                    {
+                        render.Draw(x + XPosition, y + YPosition, color);
+                    }
+                }
+            }
+        }
 
 
 

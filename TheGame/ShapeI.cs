@@ -9,42 +9,105 @@ namespace TheGame
         {
         }
 
-        protected override void DrawZero(IRender render)
+        private bool[,] _shapeI0 = 
         {
-            render.Draw(XPosition + 3, YPosition + 1, ShapeColor.Cyan);
-            render.Draw(XPosition + 4, YPosition + 1, ShapeColor.Cyan);
-            render.Draw(XPosition + 5, YPosition + 1, ShapeColor.Cyan);
-            render.Draw(XPosition + 6, YPosition + 1, ShapeColor.Cyan);
+            {false, false, false, false},
+            {true, true, true, true},
+            {false, false, false, false},
+            {false, false, false, false}
+        };
+
+        private bool[,] _shapeI90 =
+        {
+            {false, false, true, false },
+            {false, false, true, false },
+            {false, false, true, false },
+            {false, false, true, false }
+        };
+
+        private bool[,] _shapeI180 =
+        {
+            {false, false, false, false},
+            {true, true, true, true},
+            {false, false, false, false},
+            {false, false, false, false}
+        };
+
+        private bool[,] _shapeI270 =
+        {
+            {false, true, false, false},
+            {false, true, false, false},
+            {false, true, false, false},
+            {false, true, false, false}
+        };
+
+        //protected override bool[,] DrawGrid0(IRender render)
+        //{
+        //    for (var y = 0; y < _shapeI0.GetLength(1); y++)
+        //    {
+        //        for (var x = 0; x < _shapeI0.GetLength(0); x++)
+        //        {
+        //            if (_shapeI0[x, y])
+        //            {
+        //                render.Draw(x, y, ShapeColor.Orange);
+        //            }
+        //        }
+        //    }
+
+        //    return ShapeGrid;
+        //}
+        protected override void DrawZero(IRender render) //, bool[,] shapeGrid
+        {
+            //render.Draw(3 + XPosition, 0 + YPosition, ShapeColor.Purple);
+            DrawShapeGrid(render, _shapeI0, ShapeColor.Cyan);
+            //, XPosition, YPosition
+            //Draw(render, _shapeI0);
+            //render.Draw(XPosition, YPosition, ShapeColor.Cyan);
+
+            //for (var y = 0; y < _shapeI0.GetLength(1); y++)
+            //{
+            //    for (var x = 0; x < _shapeI0.GetLength(0); x++)
+            //    {
+            //        if (_shapeI0[x, y])
+            //        {
+            //            render.Draw(x, y, ShapeColor.Orange);
+            //        }
+            //    }
+            //}
+
+            //render.Draw(XPosition + 3, YPosition + 1, ShapeColor.Cyan);
+            //render.Draw(XPosition + 4, YPosition + 1, ShapeColor.Cyan);
+            //render.Draw(XPosition + 5, YPosition + 1, ShapeColor.Cyan);
+            //render.Draw(XPosition + 6, YPosition + 1, ShapeColor.Cyan);
         }
 
         protected override void DrawNinety(IRender render)
         {
-            render.Draw(XPosition + 5, YPosition + 0, ShapeColor.Cyan);
-            render.Draw(XPosition + 5, YPosition + 1, ShapeColor.Cyan);
-            render.Draw(XPosition + 5, YPosition + 2, ShapeColor.Cyan);
-            render.Draw(XPosition + 5, YPosition + 3, ShapeColor.Cyan);
+            DrawShapeGrid(render, _shapeI90, ShapeColor.Cyan);
+
+            //render.Draw(XPosition + 5, YPosition + 0, ShapeColor.Cyan);
+            //render.Draw(XPosition + 5, YPosition + 1, ShapeColor.Cyan);
+            //render.Draw(XPosition + 5, YPosition + 2, ShapeColor.Cyan);
+            //render.Draw(XPosition + 5, YPosition + 3, ShapeColor.Cyan);
         }
 
         protected override void DrawOneEighty(IRender render)
         {
-            render.Draw(XPosition + 3, YPosition + 2, ShapeColor.Cyan);
-            render.Draw(XPosition + 4, YPosition + 2, ShapeColor.Cyan);
-            render.Draw(XPosition + 5, YPosition + 2, ShapeColor.Cyan);
-            render.Draw(XPosition + 6, YPosition + 2, ShapeColor.Cyan);
+            DrawShapeGrid(render, _shapeI180, ShapeColor.Cyan);
+            //render.Draw(XPosition + 3, YPosition + 2, ShapeColor.Cyan);
+            //render.Draw(XPosition + 4, YPosition + 2, ShapeColor.Cyan);
+            //render.Draw(XPosition + 5, YPosition + 2, ShapeColor.Cyan);
+            //render.Draw(XPosition + 6, YPosition + 2, ShapeColor.Cyan);
         }
 
         protected override void DrawTwoSeventy(IRender render)
         {
-            render.Draw(XPosition + 4, YPosition + 0, ShapeColor.Cyan);
-            render.Draw(XPosition + 4, YPosition + 1, ShapeColor.Cyan);
-            render.Draw(XPosition + 4, YPosition + 2, ShapeColor.Cyan);
-            render.Draw(XPosition + 4, YPosition + 3, ShapeColor.Cyan);
+            DrawShapeGrid(render, _shapeI270, ShapeColor.Cyan);
+            //render.Draw(XPosition + 4, YPosition + 0, ShapeColor.Cyan);
+            //render.Draw(XPosition + 4, YPosition + 1, ShapeColor.Cyan);
+            //render.Draw(XPosition + 4, YPosition + 2, ShapeColor.Cyan);
+            //render.Draw(XPosition + 4, YPosition + 3, ShapeColor.Cyan);
         }
 
-        public Boolean[,] ShapeGrid = new bool[,]
-        {
-            {false, true},
-            {true, false}
-        };
     }
 }
