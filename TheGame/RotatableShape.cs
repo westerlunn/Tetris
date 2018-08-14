@@ -29,12 +29,11 @@ namespace TheGame
             return Rotation == ShapeRotation.TwoSeventy;
         }
 
-        public override void Draw(IRender render) //, bool[,] shapeGrid
+        public override void Draw(IRender render)
         {
             switch (Rotation)
             {
                 case ShapeRotation.Zero:
-                    //DrawGrid0(render);
                     DrawZero(render);
                     break;
                 case ShapeRotation.Ninety:
@@ -52,8 +51,6 @@ namespace TheGame
         }
 
         protected abstract void DrawZero(IRender render);
-        //, bool[,] shapeGrid
-        //protected abstract void DrawGrid0(IRender render);
 
         protected abstract void DrawNinety(IRender render);
 

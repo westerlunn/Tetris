@@ -12,9 +12,10 @@ using TetrisUI;
 namespace TheGame
 {
 
-
-    public partial class Form1 : GameBoard
+    public partial class Game : GameBoard
     {
+        private Shape _activeShape;
+
         public List<Shape> Shapes { get; } = new List<Shape>();
 
         //public bool[,] ShapeGrid = new bool[,]
@@ -31,10 +32,35 @@ namespace TheGame
         //    {0, 0} = true,
         //};
 
-public Form1() : base(1000)
+        //public bool IsLocationLeftWithinBounds(Shape shape)
+        //{
+        //    var xCoordinate = shape.XPosition;
+        //    for (int i = 0; i < shape.ShapeGrid.GetLength(0); i++)
+        //    {
+        //        if (shape.ShapeGrid[i, shape.ShapeGrid.GetLength(0) - 1])
+        //        {
+        //            xCoordinate++;
+        //        }
+        //    }
+
+        //    return xCoordinate > 0;
+        //}
+
+        public void withinBounds()
         {
-            Shapes.Add(new ShapeI(3, 0, ShapeRotation.Zero)); //ShapeType.I, 
+
+        }
+
+        public Game() : base(1000)
+        {
+            //Shapes.Add(new ShapeI(3, 0, ShapeRotation.Zero));
+            //Shapes.Add(new ShapeJ(0, 5, ShapeRotation.Zero));
+            Shapes.Add(new ShapeO(0,4));
             //Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Ninety, 0, 0));
+            var testShapeBlock = new bool[,]
+            {
+                {true}
+            };
         }
 
         protected override void UpdateGame()
@@ -55,7 +81,7 @@ public Form1() : base(1000)
             {
                 shape.Draw(render);
             }
-
+            
             //throw new NotImplementedException();
         }
 
@@ -80,7 +106,11 @@ public Form1() : base(1000)
         {
             foreach (var shape in Shapes)
             {
-                shape.XPosition--;
+                
+                if (shape.XPosition > 0)
+                {
+                    shape.XPosition--;
+                }
             }
         }
 
@@ -88,9 +118,11 @@ public Form1() : base(1000)
         {
             foreach (var shape in Shapes)
             {
-                shape.XPosition++;
+                //if (shape.XPosition < 8)
+                {
+                    shape.XPosition++;
+                }
             }
-            //throw new NotImplementedException("Right");
         }
 
         protected void CreateShape()

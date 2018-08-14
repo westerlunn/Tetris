@@ -28,8 +28,8 @@ namespace TheGame
         private bool[,] _shapeI180 =
         {
             {false, false, false, false},
-            {true, true, true, true},
             {false, false, false, false},
+            {true, true, true, true},
             {false, false, false, false}
         };
 
