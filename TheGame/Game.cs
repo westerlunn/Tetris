@@ -15,8 +15,9 @@ namespace TheGame
     public partial class Game : GameBoard
     {
         private Shape _activeShape;
+        private List<Block> _deadBlocks;
 
-        public List<Shape> Shapes { get; } = new List<Shape>();
+        //public List<Shape> Shapes { get; } = new List<Shape>();
 
         //public bool[,] ShapeGrid = new bool[,]
         //{
@@ -46,40 +47,39 @@ namespace TheGame
         //    return xCoordinate > 0;
         //}
 
-        public void withinBounds()
+        public void WithinBounds()
         {
 
         }
 
         public Game() : base(1000)
         {
+            _deadBlocks = new List<Block>();
             //Shapes.Add(new ShapeI(3, 0, ShapeRotation.Zero));
             //Shapes.Add(new ShapeJ(0, 5, ShapeRotation.Zero));
-            Shapes.Add(new ShapeO(0,4));
+            //Shapes.Add(new ShapeO(0,4));
             //Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Ninety, 0, 0));
-            var testShapeBlock = new bool[,]
-            {
-                {true}
-            };
+            _activeShape = new ShapeJ(0, 0);
         }
 
         protected override void UpdateGame()
         {
-            foreach (var shape in Shapes)
+            if (_activeShape.GetBlocks().All(b => b.YPosition < 19))
             {
-                if (shape.YPosition < 18)
-                {
-                shape.YPosition++;
-
-                }
+                _activeShape.YPosition++;
             }
         }
 
         protected override void Render(IRender render)
         {
-            foreach (var shape in Shapes)
+            foreach (var block in _activeShape.GetBlocks())
             {
-                shape.Draw(render);
+                render.Draw(block.XPosition, block.YPosition, block.Color);
+            }
+
+            foreach (var block in _deadBlocks)
+            {
+                render.Draw(block.XPosition, block.YPosition, block.Color);
             }
             
             //throw new NotImplementedException();
@@ -87,48 +87,51 @@ namespace TheGame
 
         protected override void Rotate()
         {
-            foreach (var shape in Shapes)
+            if (_activeShape is RotatableShape rotatableShape)
             {
-                if(shape is RotatableShape rotatableShape)
-                {
-                    rotatableShape.Rotate();
-                }
+                rotatableShape.Rotate();
             }
         }
 
         protected override void Drop()
         {
-            CreateShape();
+            //CreateShape();
             //throw new NotImplementedException("Drop");
         }
 
         protected override void MoveLeft()
         {
-            foreach (var shape in Shapes)
-            {
-                
-                if (shape.XPosition > 0)
+            //foreach (var shape in Shapes)
+            //{
+
+                if (_activeShape.GetBlocks().All(b => b.XPosition > 0))
                 {
-                    shape.XPosition--;
+                    _activeShape.XPosition--;
                 }
-            }
+            //}
         }
 
         protected override void MoveRight()
         {
-            foreach (var shape in Shapes)
+            //foreach (var shape in Shapes)
+            //{
+            //    if (shape.XPosition < 8)
+            //    {
+            //        shape.XPosition++;
+            //    }
+            //}
+            
+            if (_activeShape.GetBlocks().All(b => b.XPosition < 9))
             {
-                //if (shape.XPosition < 8)
-                {
-                    shape.XPosition++;
-                }
+                _activeShape.XPosition++;
             }
         }
 
         protected void CreateShape()
         {
-            Shapes.Add(new ShapeI(0, 0, ShapeRotation.Ninety));
+            //Shapes.Add(new ShapeI(0, 0, ShapeRotation.Ninety));
             //Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Zero, 0, 0));
         }
+
     }
 }

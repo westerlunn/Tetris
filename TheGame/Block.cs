@@ -14,17 +14,12 @@ namespace TheGame
         public ShapeColor Color { get; set; }
         public bool IsFilled { get; set; }
 
-        public Block(int xPosition, int yPosition, ShapeColor color)
+        public Block(int xPosition, int yPosition, ShapeColor color, bool isFilled = true)
         {
             XPosition = xPosition;
             YPosition = yPosition;
-            
-        }
-
-        public Block(int xPosition, int yPosition)
-        {
-            XPosition = xPosition;
-            YPosition = yPosition;
+            Color = color;
+            IsFilled = isFilled;
         }
     }
 }

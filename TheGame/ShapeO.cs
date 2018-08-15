@@ -4,8 +4,15 @@ namespace TheGame
 {
     public class ShapeO : Shape
     {
-        public ShapeO(int xPosition, int yPosition) : base(xPosition, yPosition)
+        private const ShapeColor _color = ShapeColor.Yellow;
+
+        public ShapeO(int xPosition, int yPosition) : base(xPosition, yPosition, _color)
         {
+            _shape = new[,]
+            {
+                {true, true},
+                {true, true}
+            };
         }
 
         private bool[,] _shapeO =
@@ -13,14 +20,14 @@ namespace TheGame
             {true, true},
             {true, true}
         };
-        public override void Draw(IRender render)
-        {
-            if (IsAllowedPosition(_shapeO))
-            {
-                //GetBlock(_shapeO, ShapeColor.Yellow);
-                DrawShapeGrid(render, _shapeO, ShapeColor.Yellow);
-            }
+        //public override void Draw(IRender render)
+        //{
+        //    //if (IsAllowedPosition(_shape))
+        //    {
+        //        //GetBlock(_shapeO, ShapeColor.Yellow);
+        //        DrawShapeGrid(render, _shapeO, ShapeColor.Yellow);
+        //    }
 
-        }
+        //}
     }
 }

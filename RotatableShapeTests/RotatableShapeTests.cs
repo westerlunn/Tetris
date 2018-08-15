@@ -11,8 +11,13 @@ namespace RotatableShapeTests
         [TestMethod]
         public void ShapeRotationShouldBeNinety()
         {
+            // Arrange
             var shapeI = new ShapeI(0, 0, ShapeRotation.Zero);
+
+            // Act
             shapeI.Rotate();
+
+            // Assert
             shapeI.Rotation.Should().Be(ShapeRotation.Ninety);
         }
 

@@ -6,71 +6,57 @@ namespace TheGame
 {
     public abstract class Shape
     {
+        protected bool[,] _shape;
+
         //public ShapeType Type { get; }
         public ShapeColor Color { get; }
         //public ShapeRotation Rotation { get; set; }
         public int XPosition { get; set; }
         public int YPosition { get; set; }
-        public bool[,] ShapeGrid { get; set; }
-        public List<Block> Blocks { get; set; }
+        //public bool[,] ShapeGrid { get; set; }
+        //public List<Block> Blocks { get; set; }
         
-        protected Shape(int xPosition, int yPosition) 
+        protected Shape(int xPosition, int yPosition, ShapeColor color) 
         {
             //Type = type; ShapeType type,
             //Rotation = rotation;
             XPosition = xPosition;
             YPosition = yPosition;
+            Color = color;
         }
 
-        public abstract void Draw(IRender render); 
+        //public abstract void Draw(IRender render); 
 
-        public void DrawShapeGrid(IRender render, bool[,] shapeGrid, ShapeColor color) 
-        {
-            for (var m = 0; m < shapeGrid.GetLength(1); m++)
-            {
-                for (var n = 0; n < shapeGrid.GetLength(0); n++)
-                {
-                    if (shapeGrid[m, n])
-                    {
-                        render.Draw(n + XPosition, m + YPosition, color);
-                    }
-                }
-            }
-        }
+        //public void DrawShapeGrid(IRender render, bool[,] shapeGrid, ShapeColor color) 
+        //{
+        //    for (var m = 0; m < shapeGrid.GetLength(1); m++)
+        //    {
+        //        for (var n = 0; n < shapeGrid.GetLength(0); n++)
+        //        {
+        //            if (shapeGrid[m, n])
+        //            {
+        //                render.Draw(n + XPosition, m + YPosition, color);
+        //            }
+        //        }
+        //    }
+        //}
 
-        public void GetBlock(bool[,] shapeGrid, ShapeColor color)
+        public List<Block> GetBlocks()
         {
-            var Blocks = new List<Block>();
-            for (var m = 0; m < shapeGrid.GetLength(1); m++)
-            {
-                for (var n = 0; n < shapeGrid.GetLength(0); n++)
-                {
-                    if (shapeGrid[m, n])
-                    {
-                        Blocks.Add(new Block(n + XPosition, m + YPosition, color));
-                    }
-                }
-            }
-        }
+            var blocks = new List<Block>();
 
-        public bool IsAllowedPosition(bool[,] shapeGrid)
-        {
-            for (var m = 0; m < shapeGrid.GetLength(1); m++)
+            for (var y = 0; y < _shape.GetLength(1); y++)
             {
-                for (var n = 0; n < shapeGrid.GetLength(0); n++)
+                for (var x = 0; x < _shape.GetLength(0); x++)
                 {
-                    if (m + XPosition < 10 && m + XPosition >= 0 && n + YPosition < 20 && n + YPosition >= 0)
+                    if (_shape[y, x])
                     {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
+                        blocks.Add(new Block(x + XPosition, y + YPosition, Color));
                     }
                 }
             }
 
-            return false;
+            return blocks;
         }
 
         //public void Rotate()

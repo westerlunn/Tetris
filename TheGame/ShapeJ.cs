@@ -4,8 +4,16 @@ namespace TheGame
 {
     public class ShapeJ : RotatableShape
     {
-        public ShapeJ(int xPosition, int yPosition, ShapeRotation rotation) : base(xPosition, yPosition, rotation)
+        private const ShapeColor _color = ShapeColor.Blue;
+
+        public ShapeJ(int xPosition, int yPosition, ShapeRotation rotation = ShapeRotation.Zero) : base(xPosition, yPosition, _color, rotation)
         {
+            _shape = new[,]
+            {
+                {true, false, false},
+                {true, true, true},
+                {false, false, false}
+            };
         }
 
         //private Block[,] _shapeJ =
@@ -43,24 +51,24 @@ namespace TheGame
             {true, true, false}
         };
 
-        protected override void DrawZero(IRender render)
-        {
-            DrawShapeGrid(render, _shapeJ0, ShapeColor.Blue);
-        }
+        //protected override void DrawZero(IRender render)
+        //{
+        //    DrawShapeGrid(render, _shapeJ0, ShapeColor.Blue);
+        //}
 
-        protected override void DrawNinety(IRender render)
-        {
-            DrawShapeGrid(render, _shapeJ90, ShapeColor.Blue);
-        }
+        //protected override void DrawNinety(IRender render)
+        //{
+        //    DrawShapeGrid(render, _shapeJ90, ShapeColor.Blue);
+        //}
 
-        protected override void DrawOneEighty(IRender render)
-        {
-            DrawShapeGrid(render, _shapeJ170, ShapeColor.Blue);
-        }
+        //protected override void DrawOneEighty(IRender render)
+        //{
+        //    DrawShapeGrid(render, _shapeJ170, ShapeColor.Blue);
+        //}
 
-        protected override void DrawTwoSeventy(IRender render)
-        {
-            DrawShapeGrid(render, _shapeJ270, ShapeColor.Blue);
-        }
+        //protected override void DrawTwoSeventy(IRender render)
+        //{
+        //    DrawShapeGrid(render, _shapeJ270, ShapeColor.Blue);
+        //}
     }
 }
