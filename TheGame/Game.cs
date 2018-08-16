@@ -12,7 +12,6 @@ using TetrisUI;
 
 namespace TheGame
 {
-
     public partial class Game : GameBoard
     {
         private Shape _activeShape;
@@ -47,7 +46,7 @@ namespace TheGame
         {
             if (_activeShape == null)
             {
-                CreateShape();
+                GetRandomShape();
             }
             if (_activeShape.GetBlocks().All(b => b.YPosition < 19))
             {
@@ -60,12 +59,7 @@ namespace TheGame
                     _deadBlocks.Add(block);
                 }
 
-                //foreach (var block in _deadBlocks)
-                //{
-                //    if (block.YPosition < 0)
-                //}
-
-                CreateShape();
+                GetRandomShape();
                 foreach (var shape in _shapes)
                 {
                     shape.YPosition = -1;
@@ -82,19 +76,54 @@ namespace TheGame
             foreach (var block in _activeShape.GetBlocks())
             {
                 render.Draw(block.XPosition, block.YPosition, block.Color);
-                //if (_activeShape.GetBlocks().Any(b => b.YPosition == 19))
-                //{
-                //    _deadBlocks.Add(block);
-                //}
             }
 
             foreach (var block in _deadBlocks)
             {
                 render.Draw(block.XPosition, block.YPosition, block.Color);
             }
-            //throw new NotImplementedException();
         }
 
+       
+
+        protected override void Rotate()
+        {
+            if (_activeShape is RotatableShape rotatableShape)
+            {
+                rotatableShape.Rotate();
+            }
+        }
+
+        protected override void Drop()
+        {
+            while (!WillCollide())
+            {
+                _activeShape.YPosition++;
+            }
+        }
+
+        protected override void MoveLeft()
+        {
+            if (IsActiveShape() && CanMoveLeft())
+            {
+                {
+                    _activeShape.XPosition--;
+                }
+            }
+        }
+
+        protected override void MoveRight()
+        {
+            if (IsActiveShape() && CanMoveRight())
+            {
+                _activeShape.XPosition++;
+            }
+        }
+
+        protected void GetRandomShape()
+        {
+            _activeShape = _shapes[_random.Next(_shapes.Count)];
+        }
         public bool IsActiveShape()
         {
 
@@ -105,17 +134,12 @@ namespace TheGame
 
             foreach (var block in _deadBlocks)
             {
-                if (_activeShape.GetBlocks().Any(b => b.YPosition + 1 == block.YPosition && b.XPosition == block.XPosition))
-                //&& _activeShape.GetBlocks().Any(b => b.XPosition + 1 == block.XPosition))
+                if (_activeShape.GetBlocks().Any(b =>
+                        b.YPosition + 1 == block.YPosition && b.XPosition == block.XPosition))
                 {
                     return false;
                 }
-                //else if (_activeShape.GetBlocks().Any(b => b.YPosition == 19))
-                //{
-                //    retur
-                //}
             }
-
             return true;
         }
 
@@ -133,7 +157,6 @@ namespace TheGame
                     return true;
                 }
             }
-
             return false;
         }
 
@@ -145,18 +168,17 @@ namespace TheGame
             }
             foreach (var deadBlock in _deadBlocks)
             {
-                    if (_activeShape.GetBlocks().Any(b => b.XPosition - 1 == deadBlock.XPosition && b.YPosition == deadBlock.YPosition))
-                    {
-                        return false;
-                    }
+                if (_activeShape.GetBlocks().Any(b => b.XPosition - 1 == deadBlock.XPosition && b.YPosition == deadBlock.YPosition))
+                {
+                    return false;
+                }
             }
-            
             return true;
         }
 
         public bool CanMoveRight()
         {
-            if(_activeShape.GetBlocks().Any(b => b.XPosition == 9))
+            if (_activeShape.GetBlocks().Any(b => b.XPosition == 9))
             {
                 return false;
             }
@@ -184,74 +206,5 @@ namespace TheGame
                 }
             }
         }
-
-        protected override void Rotate()
-        {
-            if (_activeShape is RotatableShape rotatableShape)
-            {
-                rotatableShape.Rotate();
-            }
-        }
-
-        protected override void Drop()
-        {
-            while (!WillCollide())
-            {
-                _activeShape.YPosition++;
-            }
-            //_activeShape.GetBlocks().All(b => b.YPosition > 19) || _activeShape.GetBlocks().ForEach(b => _deadBlocks.Any(b2 => b2.YPosition + 1 == b.YPosition))
-            //_activeShape.YPosition = 18;
-            //CreateShape();
-            //throw new NotImplementedException("Drop");
-        }
-
-        protected override void MoveLeft()
-        {
-            //foreach (var shape in Shapes)
-            //{
-            if (IsActiveShape() && CanMoveLeft())
-            {
-                //if (_activeShape.GetBlocks().All(b => b.XPosition > 0))
-                {
-                    _activeShape.XPosition--;
-                }
-            }
-
-            //}
-        }
-
-        protected override void MoveRight()
-        {
-            if (IsActiveShape() && CanMoveRight())
-            {
-                _activeShape.XPosition++;
-            }
-            //foreach (var shape in Shapes)
-            //{
-            //    if (shape.XPosition < 8)
-            //    {
-            //        shape.XPosition++;
-            //    }
-            //}
-
-            //if (_activeShape.GetBlocks().All(b => b.XPosition < 9))
-            //{
-            //    _activeShape.XPosition++;
-            //}
-        }
-
-        protected void CreateShape()
-        {
-            //var random = new Random();
-            //var index = random.Next(Shapes.Count);
-            //_activeShape = Shapes[index];
-            _activeShape = _shapes[_random.Next(_shapes.Count)];
-
-
-
-            //Shapes.Add(new ShapeI(0, 0, ShapeRotation.Ninety));
-            //Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Zero, 0, 0));
-        }
-
     }
 }
