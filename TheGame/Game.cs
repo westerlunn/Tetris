@@ -39,15 +39,16 @@ namespace TheGame
             _shapes.Add(new ShapeO(3, 0));
             //_activeShape = new ShapeO(0, 0);
             _random = new Random();
-
         }
 
         protected override void UpdateGame()
         {
+
             if (_activeShape == null)
             {
                 GetRandomShape();
             }
+
             if (_activeShape.GetBlocks().All(b => b.YPosition < 19))
             {
                 _activeShape.YPosition++;
@@ -65,7 +66,14 @@ namespace TheGame
                     shape.YPosition = -1;
                     shape.XPosition = 3;
                 }
-                GameOver();
+            }
+
+            IsGameOver();
+
+            var fullRows = GetFullRows();
+            if (fullRows.Count > 0)
+            {
+                MessageBox.Show("full");
             }
         }
 
@@ -84,7 +92,7 @@ namespace TheGame
             }
         }
 
-       
+
 
         protected override void Rotate()
         {
@@ -100,15 +108,15 @@ namespace TheGame
             {
                 _activeShape.YPosition++;
             }
+
+
         }
 
         protected override void MoveLeft()
         {
             if (IsActiveShape() && CanMoveLeft())
             {
-                {
-                    _activeShape.XPosition--;
-                }
+                _activeShape.XPosition--;
             }
         }
 
@@ -195,16 +203,44 @@ namespace TheGame
             return true;
         }
 
-        public void GameOver()
+        private bool IsGameOver()
         {
             foreach (var deadBlock in _deadBlocks)
             {
                 if (deadBlock.YPosition == 0)
                 {
-                    var message = "Game over";
-                    MessageBox.Show(message);
+                    ShowGameOverMessage();
                 }
             }
+
+            return true;
         }
+        private void ShowGameOverMessage()
+        {
+            var message = "Game over";
+            MessageBox.Show(message);
+        }
+
+        private List<int> GetFullRows()
+        {
+            var gameLength = 19;
+            var result = new List<int>();
+
+            for (var y = gameLength; y > 0; y--)
+            {
+                if (_deadBlocks.Where(b => b.YPosition == y).ToList().Count == 10)
+                {
+                    result.Add(y);
+                }
+            }
+
+            return result;
+        }
+
+        private void BlowRow(int row)
+        {
+            
+        }
+
     }
 }
