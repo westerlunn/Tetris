@@ -13,9 +13,6 @@ namespace TheGame
         //public ShapeRotation Rotation { get; set; }
         public int XPosition { get; set; }
         public int YPosition { get; set; }
-        //public bool[,] ShapeGrid { get; set; }
-        //public List<Block> Blocks { get; set; }
-        
         protected Shape(int xPosition, int yPosition, ShapeColor color) 
         {
             //Type = type; ShapeType type,
