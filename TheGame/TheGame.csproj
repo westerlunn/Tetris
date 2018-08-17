@@ -72,6 +72,7 @@
     <Compile Include="ShapeRotation.cs" />
     <Compile Include="ShapeTestBlock.cs" />
     <Compile Include="ShapeType.cs" />
+    <Compile Include="Player.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

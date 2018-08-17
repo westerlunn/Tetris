@@ -18,12 +18,18 @@ namespace TheGame
         private List<Shape> _shapes;
         private List<Block> _deadBlocks;
         private Random _random;
+        private Player _player;
+        private bool _running;
 
         public List<Shape> Shapes { get; } = new List<Shape>();
 
-        public void WithinBounds()
+        public void IsGameRunning()
         {
-
+            if (IsGameOver())
+            {
+                _running = false;
+            }
+            _running = true;
         }
 
         public Game() : base(500)
@@ -39,42 +45,27 @@ namespace TheGame
             _shapes.Add(new ShapeO(3, 0));
             //_activeShape = new ShapeO(0, 0);
             _random = new Random();
+            _player = new Player("Bollkalle");
         }
 
         protected override void UpdateGame()
         {
-
-            if (_activeShape == null)
+            IsGameRunning();
+            if (_running)
             {
-                GetRandomShape();
-            }
-
-            if (_activeShape.GetBlocks().All(b => b.YPosition < 19))
-            {
-                _activeShape.YPosition++;
-            }
-            if (!IsActiveShape())
-            {
-                foreach (var block in _activeShape.GetBlocks())
+                if (_activeShape == null)
                 {
-                    _deadBlocks.Add(block);
+                    GetRandomShape();
                 }
 
-                GetRandomShape();
-                foreach (var shape in _shapes)
+                if (_activeShape.GetBlocks().All(b => b.YPosition < 19))
                 {
-                    shape.YPosition = -1;
-                    shape.XPosition = 3;
+                    _activeShape.YPosition++;
                 }
+
+                KillShapeGetNewShapeAndBlowRows();
             }
 
-            IsGameOver();
-
-            var fullRows = GetFullRows();
-            if (fullRows.Count > 0)
-            {
-                MessageBox.Show("full");
-            }
         }
 
         protected override void Render(IRender render)
@@ -108,8 +99,7 @@ namespace TheGame
             {
                 _activeShape.YPosition++;
             }
-
-
+            KillShapeGetNewShapeAndBlowRows();
         }
 
         protected override void MoveLeft()
@@ -130,6 +120,12 @@ namespace TheGame
 
         protected void GetRandomShape()
         {
+            if (_activeShape != null)
+            {
+                _activeShape.YPosition = -1;
+                _activeShape.XPosition = 3;
+            }
+
             _activeShape = _shapes[_random.Next(_shapes.Count)];
         }
         public bool IsActiveShape()
@@ -160,7 +156,7 @@ namespace TheGame
             foreach (var deadBlock in _deadBlocks)
             {
                 if (_activeShape.GetBlocks().Any(b =>
-                    b.YPosition + 2 == deadBlock.YPosition && b.XPosition == deadBlock.XPosition))
+                    b.YPosition + 1 == deadBlock.YPosition && b.XPosition == deadBlock.XPosition))
                 {
                     return true;
                 }
@@ -205,20 +201,27 @@ namespace TheGame
 
         private bool IsGameOver()
         {
-            foreach (var deadBlock in _deadBlocks)
+            if (_deadBlocks.Any(b => b.YPosition == 0))
             {
-                if (deadBlock.YPosition == 0)
-                {
-                    ShowGameOverMessage();
-                }
+                ShowGameOverMessage();
+                return true;
             }
+            //foreach (var deadBlock in _deadBlocks)
+            //{
+            //    if (deadBlock.YPosition == 0)
+            //    {
+            //        ShowGameOverMessage();
+            //    }
+            //}
 
-            return true;
+            return false;
         }
         private void ShowGameOverMessage()
         {
-            var message = "Game over";
-            MessageBox.Show(message);
+            var message = "Game over! Your score was: ";
+            var score = _player.Score;
+
+            MessageBox.Show(message + score);
         }
 
         private List<int> GetFullRows()
@@ -239,8 +242,66 @@ namespace TheGame
 
         private void BlowRow(int row)
         {
-            
+            _deadBlocks.RemoveAll(b => b.YPosition == row);
+
+            foreach (var block in _deadBlocks)
+            {
+                if (block.YPosition < row)
+                {
+                    block.YPosition++;
+                }
+            }
         }
 
+        private void KillShapeGetNewShapeAndBlowRows()
+        {
+            if (!IsActiveShape())
+            {
+                foreach (var block in _activeShape.GetBlocks())
+                {
+                    _deadBlocks.Add(block);
+                }
+
+                GetRandomShape();
+            }
+
+            IsGameOver();
+
+            GetPointsForBlownRow();
+            //var fullRows = GetFullRows();
+            //if (fullRows.Count > 0)
+            //{
+
+            //    fullRows.ForEach(BlowRow);
+            //}
+            IsGameRunning();
+        }
+
+        private long GetPointsForBlownRow()
+        {
+            var fullRows = GetFullRows();
+            if (fullRows.Count > 0)
+            {
+                if (fullRows.Count == 1)
+                {
+                    _player.Score += 40;
+                }
+                else if (fullRows.Count == 2)
+                {
+                    _player.Score += 100;
+                }
+                else if (fullRows.Count == 3)
+                {
+                    _player.Score += 300;
+                }
+                else if (fullRows.Count == 4)
+                {
+                    _player.Score += 1200;
+                }
+                fullRows.ForEach(BlowRow);
+            }
+
+            return _player.Score;
+        }
     }
 }
