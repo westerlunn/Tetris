@@ -19,18 +19,10 @@ namespace TheGame
         private List<Block> _deadBlocks;
         private Random _random;
         private Player _player;
-        private bool _running;
+        private bool _running = true;
 
-        public List<Shape> Shapes { get; } = new List<Shape>();
+        //public List<Shape> Shapes { get; } = new List<Shape>();
 
-        public void IsGameRunning()
-        {
-            if (IsGameOver())
-            {
-                _running = false;
-            }
-            _running = true;
-        }
 
         public Game() : base(500)
         {
@@ -50,8 +42,9 @@ namespace TheGame
 
         protected override void UpdateGame()
         {
-            IsGameRunning();
+            //IsGameRunning();
             if (_running)
+            //if (!IsGameOver())
             {
                 if (_activeShape == null)
                 {
@@ -65,7 +58,6 @@ namespace TheGame
 
                 KillShapeGetNewShapeAndBlowRows();
             }
-
         }
 
         protected override void Render(IRender render)
@@ -203,9 +195,12 @@ namespace TheGame
         {
             if (_deadBlocks.Any(b => b.YPosition == 0))
             {
+                _running = false;
                 ShowGameOverMessage();
                 return true;
             }
+
+            return false;
             //foreach (var deadBlock in _deadBlocks)
             //{
             //    if (deadBlock.YPosition == 0)
@@ -214,14 +209,15 @@ namespace TheGame
             //    }
             //}
 
-            return false;
         }
         private void ShowGameOverMessage()
         {
-            var message = "Game over! Your score was: ";
-            var score = _player.Score;
-
-            MessageBox.Show(message + score);
+            var asd = MessageBox.Show($"Game over! Your score was: {_player.Score}");
+            if (asd == DialogResult.OK)
+            {
+                _deadBlocks.RemoveAll(b => b.YPosition != -10);
+                _running = true;
+            }
         }
 
         private List<int> GetFullRows()
@@ -274,7 +270,7 @@ namespace TheGame
 
             //    fullRows.ForEach(BlowRow);
             //}
-            IsGameRunning();
+            //IsGameRunning();
         }
 
         private long GetPointsForBlownRow()
