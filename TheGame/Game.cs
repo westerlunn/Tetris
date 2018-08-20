@@ -51,6 +51,7 @@ namespace TheGame
                 if (_gameState.ActiveShape == null)
                 {
                     GetRandomShape();
+                    SaveGameState();
                 }
 
                 else if (_gameState.ActiveShape.GetBlocks().All(b => b.YPosition < 19))
@@ -59,6 +60,7 @@ namespace TheGame
                 }
 
                 KillShapeGetNewShapeAndBlowRows();
+                UpdateGameState();
             }
         }
 
@@ -120,7 +122,20 @@ namespace TheGame
 
         private void SaveGameState()
         {
+            using (var context = new GameContext())
+            {
+                context.GameStates.Add(_gameState);
+                context.SaveChanges();
+            }
+        }
 
+        private void UpdateGameState()
+        {
+            using (var context = new GameContext())
+            {
+                context.GameStates.Update(_gameState);
+                context.SaveChanges();
+            }
         }
 
         private void GetRandomShape()
