@@ -20,6 +20,7 @@ namespace TheGame
         private Random _random;
         private Player _player;
         private bool _running = true;
+        private GameState _gameState;
 
         //public List<Shape> Shapes { get; } = new List<Shape>();
 
@@ -38,6 +39,7 @@ namespace TheGame
             //_activeShape = new ShapeO(0, 0);
             _random = new Random();
             _player = new Player("Bollkalle");
+            _gameState = new GameState();
         }
 
         protected override void UpdateGame()
