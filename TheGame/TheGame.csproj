@@ -151,6 +151,10 @@
     <Compile Include="Migrations\20180817132029_MyFirstMigration.designer.cs">
       <DependentUpon>20180817132029_MyFirstMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20180820134625_SaveAndUpdate.cs" />
+    <Compile Include="Migrations\20180820134625_SaveAndUpdate.designer.cs">
+      <DependentUpon>20180820134625_SaveAndUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\GameContextModelSnapshot.cs" />
     <Compile Include="RotatableShape.cs" />
     <Compile Include="ShapeI.cs" />

@@ -9,6 +9,7 @@ namespace TheGame
 {
     public class Block
     {
+        public int BlockId { get; set; }
         public int XPosition { get; set; }
         public int YPosition { get; set; }
         public ShapeColor Color { get; set; }

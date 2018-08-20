@@ -9,6 +9,7 @@ namespace TheGame
         protected bool[,] _shape;
 
         //public ShapeType Type { get; }
+        public int ShapeId { get; set; }
         public ShapeColor Color { get; }
         //public ShapeRotation Rotation { get; set; }
         public int XPosition { get; set; }
