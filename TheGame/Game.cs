@@ -14,20 +14,21 @@ namespace TheGame
 {
     public partial class Game : GameBoard
     {
-        private Shape _activeShape;
+        //private Shape _activeShape;
         private List<Shape> _shapes;
-        private List<Block> _deadBlocks;
+        //private List<Block> _deadBlocks;
         private Random _random;
-        private Player _player;
+        //private Player _player;
         private bool _running = true;
         private GameState _gameState;
+
 
         //public List<Shape> Shapes { get; } = new List<Shape>();
 
 
         public Game() : base(500)
         {
-            _deadBlocks = new List<Block>();
+            //_deadBlocks = new List<Block>();
             //Shapes.Add(new ShapeI(3, 0, ShapeRotation.Zero));
             //Shapes.Add(new ShapeJ(0, 5, ShapeRotation.Zero));
             //Shapes.Add(new ShapeO(0,4));
@@ -38,22 +39,23 @@ namespace TheGame
             _shapes.Add(new ShapeO(3, 0));
             //_activeShape = new ShapeO(0, 0);
             _random = new Random();
-            _player = new Player("Bollkalle");
+            //_player = new Player("Bollkalle");
             _gameState = new GameState();
+            
         }
 
         protected override void UpdateGame()
         {
             if (_running)
             {
-                if (_activeShape == null)
+                if (_gameState.ActiveShape == null)
                 {
                     GetRandomShape();
                 }
 
-                if (_activeShape.GetBlocks().All(b => b.YPosition < 19))
+                else if (_gameState.ActiveShape.GetBlocks().All(b => b.YPosition < 19))
                 {
-                    _activeShape.YPosition++;
+                    _gameState.ActiveShape.YPosition++;
                 }
 
                 KillShapeGetNewShapeAndBlowRows();
@@ -62,14 +64,14 @@ namespace TheGame
 
         protected override void Render(IRender render)
         {
-            if (_activeShape == null) return;
+            if (_gameState.ActiveShape == null) return;
 
-            foreach (var block in _activeShape.GetBlocks())
+            foreach (var block in _gameState.ActiveShape.GetBlocks())
             {
                 render.Draw(block.XPosition, block.YPosition, block.Color);
             }
 
-            foreach (var block in _deadBlocks)
+            foreach (var block in _gameState.DeadBlocks)
             {
                 render.Draw(block.XPosition, block.YPosition, block.Color);
             }
@@ -79,7 +81,7 @@ namespace TheGame
 
         protected override void Rotate()
         {
-            if (_activeShape is RotatableShape rotatableShape)
+            if (_gameState.ActiveShape is RotatableShape rotatableShape)
             {
                 rotatableShape.Rotate();
             }
@@ -89,7 +91,7 @@ namespace TheGame
         {
             while (!WillCollide())
             {
-                _activeShape.YPosition++;
+                _gameState.ActiveShape.YPosition++;
             }
             KillShapeGetNewShapeAndBlowRows();
         }
@@ -98,7 +100,7 @@ namespace TheGame
         {
             if (IsActiveShape() && CanMoveLeft())
             {
-                _activeShape.XPosition--;
+                _gameState.ActiveShape.XPosition--;
             }
         }
 
@@ -106,7 +108,7 @@ namespace TheGame
         {
             if (IsActiveShape() && CanMoveRight())
             {
-                _activeShape.XPosition++;
+                _gameState.ActiveShape.XPosition++;
             }
         }
 
@@ -116,28 +118,33 @@ namespace TheGame
             //    textb
         }
 
+        private void SaveGameState()
+        {
+
+        }
+
         private void GetRandomShape()
         {
-            if (_activeShape != null)
+            if (_gameState.ActiveShape != null)
             {
-                _activeShape.YPosition = -1;
-                _activeShape.XPosition = 3;
+                _gameState.ActiveShape.YPosition = -1;
+                _gameState.ActiveShape.XPosition = 3;
             }
 
-            _activeShape = _shapes[_random.Next(_shapes.Count)];
+            _gameState.ActiveShape = _shapes[_random.Next(_shapes.Count)];
         }
 
         private bool IsActiveShape()
         {
 
-            if (_activeShape.GetBlocks().Any(b => b.YPosition == 19))
+            if (_gameState.ActiveShape.GetBlocks().Any(b => b.YPosition == 19))
             {
                 return false;
             }
 
-            foreach (var block in _deadBlocks)
+            foreach (var block in _gameState.DeadBlocks)
             {
-                if (_activeShape.GetBlocks().Any(b =>
+                if (_gameState.ActiveShape.GetBlocks().Any(b =>
                         b.YPosition + 1 == block.YPosition && b.XPosition == block.XPosition))
                 {
                     return false;
@@ -148,13 +155,13 @@ namespace TheGame
 
         private bool WillCollide()
         {
-            if (_activeShape.GetBlocks().Any(b => b.YPosition == 19))
+            if (_gameState.ActiveShape.GetBlocks().Any(b => b.YPosition == 19))
             {
                 return true;
             }
-            foreach (var deadBlock in _deadBlocks)
+            foreach (var deadBlock in _gameState.DeadBlocks)
             {
-                if (_activeShape.GetBlocks().Any(b =>
+                if (_gameState.ActiveShape.GetBlocks().Any(b =>
                     b.YPosition + 1 == deadBlock.YPosition && b.XPosition == deadBlock.XPosition))
                 {
                     return true;
@@ -165,13 +172,13 @@ namespace TheGame
 
         private bool CanMoveLeft()
         {
-            if (_activeShape.GetBlocks().Any(b => b.XPosition == 0))
+            if (_gameState.ActiveShape.GetBlocks().Any(b => b.XPosition == 0))
             {
                 return false;
             }
-            foreach (var deadBlock in _deadBlocks)
+            foreach (var deadBlock in _gameState.DeadBlocks)
             {
-                if (_activeShape.GetBlocks().Any(b => b.XPosition - 1 == deadBlock.XPosition && b.YPosition == deadBlock.YPosition))
+                if (_gameState.ActiveShape.GetBlocks().Any(b => b.XPosition - 1 == deadBlock.XPosition && b.YPosition == deadBlock.YPosition))
                 {
                     return false;
                 }
@@ -181,14 +188,14 @@ namespace TheGame
 
         private bool CanMoveRight()
         {
-            if (_activeShape.GetBlocks().Any(b => b.XPosition == 9))
+            if (_gameState.ActiveShape.GetBlocks().Any(b => b.XPosition == 9))
             {
                 return false;
             }
 
-            foreach (var deadBlock in _deadBlocks)
+            foreach (var deadBlock in _gameState.DeadBlocks)
             {
-                if (_activeShape.GetBlocks().Any(b =>
+                if (_gameState.ActiveShape.GetBlocks().Any(b =>
                     b.XPosition + 1 == deadBlock.XPosition && b.YPosition == deadBlock.YPosition))
                 {
                     return false;
@@ -200,7 +207,7 @@ namespace TheGame
 
         private bool IsGameOver()
         {
-            if (_deadBlocks.Any(b => b.YPosition == 0))
+            if (_gameState.DeadBlocks.Any(b => b.YPosition == 0))
             {
                 _running = false;
                 ShowGameOverMessage();
@@ -219,10 +226,10 @@ namespace TheGame
         }
         private void ShowGameOverMessage()
         {
-            var result = MessageBox.Show($"Game over! Your score was: {_player.Score}");
+            var result = MessageBox.Show($"Game over! Your score was: {_gameState.Score}");
             if (result == DialogResult.OK)
             {
-                _deadBlocks.RemoveAll(b => b.YPosition != -10);
+                _gameState.DeadBlocks.RemoveAll(b => b.YPosition != -10);
                 _running = true;
             }
         }
@@ -234,7 +241,7 @@ namespace TheGame
 
             for (var y = gameLength; y > 0; y--)
             {
-                if (_deadBlocks.Where(b => b.YPosition == y).ToList().Count == 10)
+                if (_gameState.DeadBlocks.Where(b => b.YPosition == y).ToList().Count == 10)
                 {
                     result.Add(y);
                 }
@@ -245,9 +252,9 @@ namespace TheGame
 
         private void BlowRow(int row)
         {
-            _deadBlocks.RemoveAll(b => b.YPosition == row);
+            _gameState.DeadBlocks.RemoveAll(b => b.YPosition == row);
 
-            foreach (var block in _deadBlocks)
+            foreach (var block in _gameState.DeadBlocks)
             {
                 if (block.YPosition < row)
                 {
@@ -260,9 +267,9 @@ namespace TheGame
         {
             if (!IsActiveShape())
             {
-                foreach (var block in _activeShape.GetBlocks())
+                foreach (var block in _gameState.ActiveShape.GetBlocks())
                 {
-                    _deadBlocks.Add(block);
+                    _gameState.DeadBlocks.Add(block);
                 }
 
                 GetRandomShape();
@@ -287,24 +294,24 @@ namespace TheGame
             {
                 if (fullRows.Count == 1)
                 {
-                    _player.Score += 40;
+                    _gameState.Score += 40;
                 }
                 else if (fullRows.Count == 2)
                 {
-                    _player.Score += 100;
+                    _gameState.Score += 100;
                 }
                 else if (fullRows.Count == 3)
                 {
-                    _player.Score += 300;
+                    _gameState.Score += 300;
                 }
                 else if (fullRows.Count == 4)
                 {
-                    _player.Score += 1200;
+                    _gameState.Score += 1200;
                 }
                 fullRows.ForEach(BlowRow);
             }
 
-            return _player.Score;
+            return _gameState.Score;
         }
     }
 }
