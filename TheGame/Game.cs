@@ -42,9 +42,7 @@ namespace TheGame
 
         protected override void UpdateGame()
         {
-            //IsGameRunning();
             if (_running)
-            //if (!IsGameOver())
             {
                 if (_activeShape == null)
                 {
@@ -110,7 +108,13 @@ namespace TheGame
             }
         }
 
-        protected void GetRandomShape()
+        private void NewGame()
+        {
+            //MessageBox.Show($"")
+            //    textb
+        }
+
+        private void GetRandomShape()
         {
             if (_activeShape != null)
             {
@@ -120,7 +124,8 @@ namespace TheGame
 
             _activeShape = _shapes[_random.Next(_shapes.Count)];
         }
-        public bool IsActiveShape()
+
+        private bool IsActiveShape()
         {
 
             if (_activeShape.GetBlocks().Any(b => b.YPosition == 19))
@@ -139,7 +144,7 @@ namespace TheGame
             return true;
         }
 
-        public bool WillCollide()
+        private bool WillCollide()
         {
             if (_activeShape.GetBlocks().Any(b => b.YPosition == 19))
             {
@@ -156,7 +161,7 @@ namespace TheGame
             return false;
         }
 
-        public bool CanMoveLeft()
+        private bool CanMoveLeft()
         {
             if (_activeShape.GetBlocks().Any(b => b.XPosition == 0))
             {
@@ -172,7 +177,7 @@ namespace TheGame
             return true;
         }
 
-        public bool CanMoveRight()
+        private bool CanMoveRight()
         {
             if (_activeShape.GetBlocks().Any(b => b.XPosition == 9))
             {
@@ -212,8 +217,8 @@ namespace TheGame
         }
         private void ShowGameOverMessage()
         {
-            var asd = MessageBox.Show($"Game over! Your score was: {_player.Score}");
-            if (asd == DialogResult.OK)
+            var result = MessageBox.Show($"Game over! Your score was: {_player.Score}");
+            if (result == DialogResult.OK)
             {
                 _deadBlocks.RemoveAll(b => b.YPosition != -10);
                 _running = true;

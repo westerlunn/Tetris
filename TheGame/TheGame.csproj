@@ -146,6 +146,7 @@
       <DependentUpon>Game.cs</DependentUpon>
     </Compile>
     <Compile Include="GameContext.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="Migrations\20180817132029_MyFirstMigration.cs" />
     <Compile Include="Migrations\20180817132029_MyFirstMigration.designer.cs">
       <DependentUpon>20180817132029_MyFirstMigration.cs</DependentUpon>

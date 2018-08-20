@@ -17,5 +17,13 @@ namespace TheGame
         public Player()
         {
         }
+
+        public Player(int id, string username, long highscore, long score)
+        {
+            Id = id;
+            Username = username;
+            Highscore = highscore;
+            Score = score;
+        }
     }
 }
