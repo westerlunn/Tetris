@@ -41,12 +41,13 @@ namespace TheGame
             //_activeShape = new ShapeO(0, 0);
             _random = new Random();
             //_player = new Player("Bollkalle");
-            //_gameState = GetLatestGameState();
 
-            //if (GetLatestGameState() == null)
-            //{
-                _gameState = new GameState();
-            //}
+            _gameState = GetLatestGameState();
+
+            if (GetLatestGameState() == null)
+            {
+                CreateNewGameState();
+            }
 
         }
 
@@ -57,7 +58,7 @@ namespace TheGame
                 if (_gameState.ActiveShape == null)
                 {
                     GetRandomShape();
-                    SaveGameState();
+                    //SaveGameState();
                 }
 
                 else if (_gameState.ActiveShape.GetBlocks().All(b => b.YPosition < 19))
@@ -120,10 +121,11 @@ namespace TheGame
             }
         }
 
-        private void NewGame()
+        private void CreateNewGameState()
         {
-            //MessageBox.Show($"")
-            //    textb
+            _gameState = new GameState();
+            _running = true;
+            SaveGameState();
         }
 
         private void SaveGameState()
@@ -241,6 +243,7 @@ namespace TheGame
             {
                 _running = false;
                 ShowGameOverMessage();
+                CreateNewGameState();
                 return true;
             }
 
