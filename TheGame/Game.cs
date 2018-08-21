@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore;
 using TetrisUI;
 
 namespace TheGame
@@ -40,8 +41,13 @@ namespace TheGame
             //_activeShape = new ShapeO(0, 0);
             _random = new Random();
             //_player = new Player("Bollkalle");
-            _gameState = new GameState();
-            
+            //_gameState = GetLatestGameState();
+
+            //if (GetLatestGameState() == null)
+            //{
+                _gameState = new GameState();
+            //}
+
         }
 
         protected override void UpdateGame()
@@ -135,6 +141,15 @@ namespace TheGame
             {
                 context.GameStates.Update(_gameState);
                 context.SaveChanges();
+            }
+        }
+
+        private GameState GetLatestGameState()
+        {
+            using (var context = new GameContext())
+            {
+                var latestGameState = context.GameStates.FirstOrDefault(g => g.GameStateId == 4);
+                return latestGameState;
             }
         }
 

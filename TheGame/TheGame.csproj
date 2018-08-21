@@ -155,6 +155,14 @@
     <Compile Include="Migrations\20180820134625_SaveAndUpdate.designer.cs">
       <DependentUpon>20180820134625_SaveAndUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20180820144659_DeadBlocks.cs" />
+    <Compile Include="Migrations\20180820144659_DeadBlocks.designer.cs">
+      <DependentUpon>20180820144659_DeadBlocks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180820150627_ModelBuilderDeadBlocks.cs" />
+    <Compile Include="Migrations\20180820150627_ModelBuilderDeadBlocks.designer.cs">
+      <DependentUpon>20180820150627_ModelBuilderDeadBlocks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\GameContextModelSnapshot.cs" />
     <Compile Include="RotatableShape.cs" />
     <Compile Include="ShapeI.cs" />

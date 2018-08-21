@@ -28,6 +28,9 @@ namespace TheGame
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<GameState>()
+                .HasMany(g => g.DeadBlocks)
+                .WithOne(d => d.GameState);
             modelBuilder.Entity<Shape>()
                 .ToTable("Shapes")
                 .HasDiscriminator<int>("ShapeType")
