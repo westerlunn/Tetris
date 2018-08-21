@@ -23,33 +23,33 @@ namespace TheGame
         //    {false, false, false}
         //};
 
-        private bool[,] _shapeJ0 =
-        {
-            {true, false, false},
-            {true, true, true},
-            {false, false, false}
-        };
+        //private bool[,] _shapeJ0 =
+        //{
+        //    {true, false, false},
+        //    {true, true, true},
+        //    {false, false, false}
+        //};
 
-        private bool[,] _shapeJ90 =
-        {
-            {false, true, true},
-            {false, true, false},
-            {false, true, false}
-        };
+        //private bool[,] _shapeJ90 =
+        //{
+        //    {false, true, true},
+        //    {false, true, false},
+        //    {false, true, false}
+        //};
 
-        private bool[,] _shapeJ170 =
-        {
-            {false, false, false},
-            {true, true, true},
-            {false, false, true}
-        };
+        //private bool[,] _shapeJ170 =
+        //{
+        //    {false, false, false},
+        //    {true, true, true},
+        //    {false, false, true}
+        //};
 
-        private bool[,] _shapeJ270 =
-        {
-            {false, true, false},
-            {false, true, false},
-            {true, true, false}
-        };
+        //private bool[,] _shapeJ270 =
+        //{
+        //    {false, true, false},
+        //    {false, true, false},
+        //    {true, true, false}
+        //};
 
         //protected override void DrawZero(IRender render)
         //{

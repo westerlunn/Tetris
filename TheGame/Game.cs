@@ -150,7 +150,10 @@ namespace TheGame
         {
             using (var context = new GameContext())
             {
-                var latestGameState = context.GameStates.FirstOrDefault(g => g.GameStateId == 4);
+                var latestGameState = context.GameStates
+                    .Include(g => g.DeadBlocks)
+                    .Include(g => g.ActiveShape)
+                    .OrderByDescending(g => g.GameStateId).FirstOrDefault();
                 return latestGameState;
             }
         }
@@ -294,6 +297,7 @@ namespace TheGame
                     block.YPosition++;
                 }
             }
+            UpdateGameState();
         }
 
         private void KillShapeGetNewShapeAndBlowRows()
