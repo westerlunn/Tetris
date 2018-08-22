@@ -124,8 +124,8 @@ namespace TheGame
         private void CreateNewGameState()
         {
             _gameState = new GameState();
-            _running = true;
             SaveGameState();
+            _running = true;
         }
 
         private void SaveGameState()
@@ -158,6 +158,14 @@ namespace TheGame
             }
         }
 
+        private void RecreateDatabase()
+        {
+            using (var context = new GameContext())
+            {
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+            }
+        }
         private void GetRandomShape()
         {
             if (_gameState.ActiveShape != null)
@@ -247,6 +255,7 @@ namespace TheGame
                 _running = false;
                 ShowGameOverMessage();
                 CreateNewGameState();
+                AskToSeedDatabase();
                 return true;
             }
 
@@ -267,6 +276,15 @@ namespace TheGame
             {
                 _gameState.DeadBlocks.RemoveAll(b => b.YPosition != -10);
                 _running = true;
+            }
+        }
+
+        private void AskToSeedDatabase()
+        {
+            var result = MessageBox.Show("Seed Database?", "Seed", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                RecreateDatabase();
             }
         }
 
@@ -297,7 +315,6 @@ namespace TheGame
                     block.YPosition++;
                 }
             }
-            UpdateGameState();
         }
 
         private void KillShapeGetNewShapeAndBlowRows()
@@ -315,6 +332,9 @@ namespace TheGame
             IsGameOver();
 
             GetPointsForBlownRow();
+
+            UpdateGameState();
+
             //var fullRows = GetFullRows();
             //if (fullRows.Count > 0)
             //{

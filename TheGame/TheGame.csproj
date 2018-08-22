@@ -163,6 +163,14 @@
     <Compile Include="Migrations\20180820150627_ModelBuilderDeadBlocks.designer.cs">
       <DependentUpon>20180820150627_ModelBuilderDeadBlocks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20180822071217_longScore.cs" />
+    <Compile Include="Migrations\20180822071217_longScore.designer.cs">
+      <DependentUpon>20180822071217_longScore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180822072323_MyFirstMigr.cs" />
+    <Compile Include="Migrations\20180822072323_MyFirstMigr.designer.cs">
+      <DependentUpon>20180822072323_MyFirstMigr.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\GameContextModelSnapshot.cs" />
     <Compile Include="RotatableShape.cs" />
     <Compile Include="ShapeI.cs" />
