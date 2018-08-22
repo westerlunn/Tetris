@@ -20,7 +20,7 @@ namespace TheGame
         //private List<Block> _deadBlocks;
         private Random _random;
         //private Player _player;
-        private bool _running = true;
+        private bool _running;
         private GameState _gameState;
 
 
@@ -37,7 +37,6 @@ namespace TheGame
             _shapes.Add(new ShapeO(3, 0));
             //_activeShape = new ShapeO(0, 0);
             _random = new Random();
-            //_player = new Player("Bollkalle");
 
             _gameState = GetLatestGameState();
 
@@ -151,6 +150,7 @@ namespace TheGame
                     .Include(g => g.DeadBlocks)
                     .Include(g => g.ActiveShape)
                     .OrderByDescending(g => g.GameStateId).FirstOrDefault();
+                _running = true;
                 return latestGameState;
             }
         }
