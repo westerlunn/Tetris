@@ -17,9 +17,6 @@ namespace TheGame
         {
         }
 
-        //public GameState(DeadBlocks deadBlocks)
-        //{
-        //    DeadBlocks = new List<Block>();
-        //}
+
     }
 }

@@ -24,9 +24,6 @@ namespace TheGame
         private GameState _gameState;
 
 
-        //public List<Shape> Shapes { get; } = new List<Shape>();
-
-
         public Game() : base(500)
         {
             //_deadBlocks = new List<Block>();
