@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace TheGame
+namespace Infrastructure.DataModel
 {
     public class Player
     {

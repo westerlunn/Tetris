@@ -1,6 +1,6 @@
 ﻿using TetrisUI;
 
-namespace TheGame
+namespace TheGame.Infrastructure.DataModel
 {
     public class ShapeO : Shape
     {

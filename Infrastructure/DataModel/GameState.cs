@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TheGame.Migrations;
 
-namespace TheGame
+namespace Infrastructure.DataModel
 {
     public class GameState
     {

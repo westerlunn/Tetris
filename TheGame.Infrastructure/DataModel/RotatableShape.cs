@@ -1,7 +1,6 @@
-﻿using System;
-using TetrisUI;
+﻿using TetrisUI;
 
-namespace TheGame
+namespace TheGame.Infrastructure.DataModel
 {
     public abstract class RotatableShape : Shape
     {

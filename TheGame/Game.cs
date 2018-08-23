@@ -8,8 +8,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EFRepository;
 using Microsoft.EntityFrameworkCore;
 using TetrisUI;
+using TheGame.Infrastructure.DataModel;
 
 namespace TheGame
 {
@@ -22,25 +24,21 @@ namespace TheGame
         //private Player _player;
         private bool _running;
         private GameState _gameState;
-
+        private GameStateRepository _repository;
 
         public Game() : base(500)
         {
-            //_deadBlocks = new List<Block>();
-            //Shapes.Add(new ShapeI(3, 0, ShapeRotation.Zero));
-            //Shapes.Add(new ShapeJ(0, 5, ShapeRotation.Zero));
-            //Shapes.Add(new ShapeO(0,4));
-            //Shapes.Add(new Shape(ShapeType.I, ShapeRotation.Ninety, 0, 0));
             _shapes = new List<Shape>();
             _shapes.Add(new ShapeI(3, 0));
             _shapes.Add(new ShapeJ(3, 0));
             _shapes.Add(new ShapeO(3, 0));
             //_activeShape = new ShapeO(0, 0);
             _random = new Random();
+            //_gameState = GetLatestGameState();
+            _repository = new GameStateRepository();
+            _gameState = _repository.GetLatestGameState();
 
-            _gameState = GetLatestGameState();
-
-            if (GetLatestGameState() == null)
+            if (_repository.GetLatestGameState() == null)
             {
                 CreateNewGameState();
             }
@@ -117,52 +115,53 @@ namespace TheGame
             }
         }
 
-        private void CreateNewGameState()
-        {
-            _gameState = new GameState();
-            SaveGameState();
-            _running = true;
-        }
 
-        private void SaveGameState()
-        {
-            using (var context = new GameContext())
-            {
-                context.GameStates.Add(_gameState);
-                context.SaveChanges();
-            }
-        }
+        //private void CreateNewGameState()
+        //{
+        //    _gameState = new GameState();
+        //    SaveGameState();
+        //    _running = true;
+        //}
 
-        private void UpdateGameState()
-        {
-            using (var context = new GameContext())
-            {
-                context.GameStates.Update(_gameState);
-                context.SaveChanges();
-            }
-        }
+        //private void SaveGameState()
+        //{
+        //    using (var context = new GameContext())
+        //    {
+        //        context.GameStates.Add(_gameState);
+        //        context.SaveChanges();
+        //    }
+        //}
 
-        private GameState GetLatestGameState()
-        {
-            using (var context = new GameContext())
-            {
-                var latestGameState = context.GameStates
-                    .Include(g => g.DeadBlocks)
-                    .Include(g => g.ActiveShape)
-                    .OrderByDescending(g => g.GameStateId).FirstOrDefault();
-                _running = true;
-                return latestGameState;
-            }
-        }
+        //private void UpdateGameState()
+        //{
+        //    using (var context = new GameContext())
+        //    {
+        //        context.GameStates.Update(_gameState);
+        //        context.SaveChanges();
+        //    }
+        //}
 
-        private void RecreateDatabase()
-        {
-            using (var context = new GameContext())
-            {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
-            }
-        }
+        //private GameState GetLatestGameState()
+        //{
+        //    using (var context = new GameContext())
+        //    {
+        //        var latestGameState = context.GameStates
+        //            .Include(g => g.DeadBlocks)
+        //            .Include(g => g.ActiveShape)
+        //            .OrderByDescending(g => g.GameStateId).FirstOrDefault();
+        //        _running = true;
+        //        return latestGameState;
+        //    }
+        //}
+
+        //private void RecreateDatabase()
+        //{
+        //    using (var context = new GameContext())
+        //    {
+        //        context.Database.EnsureDeleted();
+        //        context.Database.EnsureCreated();
+        //    }
+        //}
         private void GetRandomShape()
         {
             if (_gameState.ActiveShape != null)

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TheGame.Infrastructure.DataModel;
 
-namespace TheGame
+namespace TheGame.EFRepository
 {
     public class GameContext : DbContext
     {
@@ -14,7 +14,7 @@ namespace TheGame
         }
         public GameContext(DbContextOptions<GameContext> options) : base(options)
         {
-
+            
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -32,12 +32,15 @@ namespace TheGame
             modelBuilder.Entity<GameState>()
                 .HasMany(g => g.DeadBlocks)
                 .WithOne(d => d.GameState);
+
             modelBuilder.Entity<Shape>()
                 .ToTable("Shapes")
                 .HasDiscriminator<int>("ShapeType")
                 .HasValue<ShapeI>(1)
                 .HasValue<ShapeJ>(2)
                 .HasValue<ShapeO>(3);
+
+            modelBuilder.Entity<rota>()
         }
     }
 }

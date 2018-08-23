@@ -1,4 +1,4 @@
-﻿namespace TheGame
+﻿namespace TheGame.Infrastructure.DataModel
 {
     public enum ShapeRotation
     {
