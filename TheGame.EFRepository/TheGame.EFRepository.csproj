@@ -49,6 +49,11 @@
   <ItemGroup>
     <Compile Include="GameContext.cs" />
     <Compile Include="GameStateRepository.cs" />
+    <Compile Include="Migrations\201808241418212_FirstMigration.cs" />
+    <Compile Include="Migrations\201808241418212_FirstMigration.Designer.cs">
+      <DependentUpon>201808241418212_FirstMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +65,11 @@
       <Project>{0af0b62a-970f-4c6b-a5b0-1fe8974f3786}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201808241418212_FirstMigration.resx">
+      <DependentUpon>201808241418212_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

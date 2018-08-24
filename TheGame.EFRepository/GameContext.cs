@@ -8,7 +8,7 @@ namespace TheGame.EFRepository
         public DbSet<Player> Players { get; set; }
         public DbSet<GameState> GameStates { get; set; }
 
-        public GameContext() : base("name=myconnectionstring")
+        public GameContext() : base("Server = (localdb)\\mssqllocaldb; Database = EfGame; Trusted_Connection = True; ") //"name=myconnectionstring"
         {
 
         }

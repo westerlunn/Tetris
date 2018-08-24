@@ -173,6 +173,10 @@
       <Project>{0af0b62a-970f-4c6b-a5b0-1fe8974f3786}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TheGame.EFRepository\TheGame.EFRepository.csproj">
+      <Project>{43EFF961-480F-4D5C-980A-869F926E2166}</Project>
+      <Name>TheGame.EFRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TheGame.Services\TheGame.Services.csproj">
       <Project>{7468ef34-56e3-41e5-adf5-be5f2be02f3e}</Project>
       <Name>TheGame.Services</Name>
