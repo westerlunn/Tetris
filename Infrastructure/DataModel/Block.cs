@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TetrisUI;
+﻿using TetrisUI;
 
-namespace Infrastructure.DataModel
+namespace TheGame.Infrastructure.DataModel
 {
     public class Block
     {

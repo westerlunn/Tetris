@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using TheGame.Migrations;
 
-namespace Infrastructure.DataModel
+namespace TheGame.Infrastructure.DataModel
 {
     public class GameState
     {

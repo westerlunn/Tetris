@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using TheGame.Infrastructure.DataModel;
 using TheGame.Infrastructure.Repositories;
 
 namespace TheGame.EFRepository
+
 {
     
     public class GameStateRepository : IRepository<GameState>

@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TheGame.Business\TheGame.Business.csproj" />
-    <ProjectReference Include="..\TheGame.EFRepository\TheGame.EFRepository.csproj" />
+    <ProjectReference Include="..\TheGame.EFRepository\OLDEFRepository.csproj" />
     <ProjectReference Include="..\TheGame.Infrastructure\TheGame.Infrastructure.csproj" />
   </ItemGroup>
 

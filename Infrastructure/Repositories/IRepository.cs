@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Infrastructure.Repositories
+namespace TheGame.Infrastructure.Repositories
 {
     public interface IRepository<TEntity>
     {
@@ -10,5 +8,6 @@ namespace Infrastructure.Repositories
         void Save(TEntity entity);
         void Seed(TEntity entity);
         TEntity GetById(int id);
+        ICollection<TEntity> GetAll();
     }
 }

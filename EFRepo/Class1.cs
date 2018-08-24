@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Business
+namespace EFRepo
 {
     public class Class1
     {
