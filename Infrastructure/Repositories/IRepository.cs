@@ -6,7 +6,7 @@ namespace Infrastructure.Repositories
     {
         void Update(TEntity entity);
         void Save(TEntity entity);
-        void Seed(TEntity entity);
+        //void Seed(TEntity entity);
         TEntity GetById(int id);
         ICollection<TEntity> GetAll();
     }

@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using TheGame.Infrastructure.DataModel;
+using Infrastructure.DataModel;
 
 namespace TheGame.EFRepository
 {

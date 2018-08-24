@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
-using TheGame.Infrastructure.DataModel;
-using TheGame.Infrastructure.Repositories;
+using Infrastructure.DataModel;
+using Infrastructure.Repositories;
 
 namespace TheGame.EFRepository
 
@@ -14,8 +15,15 @@ namespace TheGame.EFRepository
         {
             using (var context = new GameContext())
             {
-                context.GameStates.Update(gameState);
-                context.SaveChanges();
+                var entity = context.GameStates.FirstOrDefault(g => g.GameStateId == gameState.GameStateId);
+                if (entity != null)
+                {
+                    context.Entry(entity).CurrentValues.SetValues(gameState);
+                }
+
+
+                //context.GameStates.Update(gameState);
+                //context.SaveChanges();
             }
         }
 
@@ -28,14 +36,14 @@ namespace TheGame.EFRepository
             }
         }
 
-        public void Seed(GameState gameState)
-        {
-            using (var context = new GameContext())
-            {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
-            }
-        }
+        //public void Seed(GameState gameState)
+        //{
+        //    using (var context = new GameContext())
+        //    {
+        //        context.Database.EnsureDeleted();
+        //        context.Database.EnsureCreated();
+        //    }
+        //}
 
         public GameState GetById(int id)
         {

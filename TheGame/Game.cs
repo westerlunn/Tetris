@@ -280,7 +280,7 @@ namespace TheGame
             var result = MessageBox.Show("Seed Database?", "Seed", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                _repository.Seed(_gameState);
+                //_repository.Seed(_gameState);
             }
         }
 
