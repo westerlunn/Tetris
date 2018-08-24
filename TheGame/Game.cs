@@ -8,10 +8,11 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using EFRepository;
 using Microsoft.EntityFrameworkCore;
 using TetrisUI;
+using TheGame.EFRepository;
 using TheGame.Infrastructure.DataModel;
+using TheGame.Infrastructure.Repositories;
 
 namespace TheGame
 {
@@ -24,9 +25,9 @@ namespace TheGame
         //private Player _player;
         private bool _running;
         private GameState _gameState;
-        private GameStateRepository _repository;
+        private IRepository<GameState> _repository;
 
-        public Game() : base(500)
+        public Game(IRepository<GameState> repository) : base(500)
         {
             _shapes = new List<Shape>();
             _shapes.Add(new ShapeI(3, 0));
@@ -35,10 +36,10 @@ namespace TheGame
             //_activeShape = new ShapeO(0, 0);
             _random = new Random();
             //_gameState = GetLatestGameState();
-            _repository = new GameStateRepository();
-            _gameState = _repository.GetLatestGameState();
+            _repository = repository;
+            _gameState = _repository.GetAll().OrderByDescending(g => g.GameStateId).FirstOrDefault();
 
-            if (_repository.GetLatestGameState() == null)
+            if (_gameState == null)
             {
                 CreateNewGameState();
             }
@@ -116,12 +117,12 @@ namespace TheGame
         }
 
 
-        //private void CreateNewGameState()
-        //{
-        //    _gameState = new GameState();
-        //    SaveGameState();
-        //    _running = true;
-        //}
+        private void CreateNewGameState()
+        {
+            _gameState = new GameState();
+            _repository.Save(_gameState);
+            _running = true;
+        }
 
         //private void SaveGameState()
         //{

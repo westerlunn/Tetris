@@ -142,7 +142,6 @@
     <Compile Include="Game.Designer.cs">
       <DependentUpon>Game.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameContext.cs" />
     <Compile Include="Migrations\20180817132029_MyFirstMigration.cs" />
     <Compile Include="Migrations\20180817132029_MyFirstMigration.designer.cs">
       <DependentUpon>20180817132029_MyFirstMigration.cs</DependentUpon>
@@ -194,6 +193,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TheGame.EFRepository\TheGame.EFRepository.csproj">
+      <Project>{0C3CF9C1-22B7-424D-8250-A0C7B39204CF}</Project>
+      <Name>TheGame.EFRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TheGame.Infrastructure\TheGame.Infrastructure.csproj">
       <Project>{8d79b190-3a42-4d1c-9b1f-64d92ab796d5}</Project>
       <Name>TheGame.Infrastructure</Name>

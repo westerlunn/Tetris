@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using TheGame.Infrastructure.DataModel;
 using TheGame.Infrastructure.Repositories;
@@ -39,11 +41,21 @@ namespace TheGame.EFRepository
         {
             using (var context = new GameContext())
             {
-                var latestGameState = context.GameStates
+                return context.GameStates
                     .Include(g => g.DeadBlocks)
                     .Include(g => g.ActiveShape)
-                    .OrderByDescending(g => g.GameStateId == id).FirstOrDefault();
-                return latestGameState;
+                    .FirstOrDefault(g => g.GameStateId == id);
+            }
+        }
+
+        public ICollection<GameState> GetAll()
+        {
+            using (var context = new GameContext())
+            {
+                return context.GameStates
+                    .Include(g => g.DeadBlocks)
+                    .Include(g => g.ActiveShape)
+                    .ToList();
             }
         }
     }

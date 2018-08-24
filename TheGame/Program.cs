@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TheGame.EFRepository;
 
 namespace TheGame
 {
@@ -16,7 +17,7 @@ namespace TheGame
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Game());
+            Application.Run(new Game(new GameStateRepository()));
         }
     }
 }

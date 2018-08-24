@@ -36,11 +36,13 @@ namespace TheGame.EFRepository
             modelBuilder.Entity<Shape>()
                 .ToTable("Shapes")
                 .HasDiscriminator<int>("ShapeType")
-                .HasValue<ShapeI>(1)
-                .HasValue<ShapeJ>(2)
-                .HasValue<ShapeO>(3);
+                .HasValue<ShapeO>(1);
 
-            modelBuilder.Entity<rota>()
+            modelBuilder.Entity<RotatableShape>()
+                .ToTable("Shapes")
+                .HasDiscriminator<int>("ShapeType")
+                .HasValue<ShapeI>(2)
+                .HasValue<ShapeJ>(3);
         }
     }
 }
