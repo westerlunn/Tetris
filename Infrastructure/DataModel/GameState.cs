@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TheGame.Infrastructure.DataModel
+namespace Infrastructure.DataModel
 {
     public class GameState
     {

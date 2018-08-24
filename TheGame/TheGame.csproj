@@ -134,8 +134,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Block.cs" />
-    <Compile Include="Board.cs" />
     <Compile Include="Game.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +172,10 @@
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{0af0b62a-970f-4c6b-a5b0-1fe8974f3786}</Project>
       <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TheGame.Services\TheGame.Services.csproj">
+      <Project>{7468ef34-56e3-41e5-adf5-be5f2be02f3e}</Project>
+      <Name>TheGame.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

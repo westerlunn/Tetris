@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TheGame.Infrastructure.Repositories
+namespace Infrastructure.Repositories
 {
     public interface IRepository<TEntity>
     {

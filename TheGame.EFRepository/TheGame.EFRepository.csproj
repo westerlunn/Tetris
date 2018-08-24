@@ -55,11 +55,5 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TheGame.Infrastructure\TheGame.Infrastructure.csproj">
-      <Project>{8d79b190-3a42-4d1c-9b1f-64d92ab796d5}</Project>
-      <Name>TheGame.Infrastructure</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

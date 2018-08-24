@@ -1,4 +1,4 @@
-﻿namespace TheGame.Infrastructure.DataModel
+﻿namespace Infrastructure.DataModel
 {
     public class Player
     {

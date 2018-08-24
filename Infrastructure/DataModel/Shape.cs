@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TetrisUI;
 
-namespace TheGame.Infrastructure.DataModel
+namespace Infrastructure.DataModel
 {
     public abstract class Shape
     {

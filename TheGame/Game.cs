@@ -8,10 +8,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Infrastructure.DataModel;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using TetrisUI;
-using TheGame.Infrastructure.DataModel;
-using TheGame.Infrastructure.Repositories;
 
 namespace TheGame
 {
