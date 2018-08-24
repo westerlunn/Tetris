@@ -62,7 +62,7 @@ namespace TheGame
                 }
 
                 KillShapeGetNewShapeAndBlowRows();
-                UpdateGameState();
+                Update();
             }
         }
 
@@ -281,7 +281,7 @@ namespace TheGame
             var result = MessageBox.Show("Seed Database?", "Seed", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                RecreateDatabase();
+                _repository.Seed(_gameState);
             }
         }
 
@@ -330,7 +330,7 @@ namespace TheGame
 
             GetPointsForBlownRow();
 
-            UpdateGameState();
+            Update();
 
             //var fullRows = GetFullRows();
             //if (fullRows.Count > 0)
