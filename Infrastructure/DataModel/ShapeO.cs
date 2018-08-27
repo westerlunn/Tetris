@@ -6,6 +6,10 @@ namespace Infrastructure.DataModel
     {
         private const ShapeColor _color = ShapeColor.Yellow;
 
+        public ShapeO()
+        {
+        }
+
         public ShapeO(int xPosition, int yPosition) : base(xPosition, yPosition, _color)
         {
             _shape = new[,]
@@ -15,11 +19,11 @@ namespace Infrastructure.DataModel
             };
         }
 
-        private bool[,] _shapeO =
-        {
-            {true, true},
-            {true, true}
-        };
+        //private bool[,] _shapeO =
+        //{
+        //    {true, true},
+        //    {true, true}
+        //};
         //public override void Draw(IRender render)
         //{
         //    //if (IsAllowedPosition(_shape))

@@ -61,7 +61,7 @@ namespace TheGame
                 }
 
                 KillShapeGetNewShapeAndBlowRows();
-                Update();
+                _repository.Update(_gameState);
             }
         }
 

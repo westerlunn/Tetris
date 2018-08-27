@@ -6,6 +6,10 @@ namespace Infrastructure.DataModel
     {
         private const ShapeColor _color = ShapeColor.Blue;
 
+        public ShapeJ()
+        {
+        }
+
         public ShapeJ(int xPosition, int yPosition, ShapeRotation rotation = ShapeRotation.Zero) : base(xPosition, yPosition, _color, rotation)
         {
             _shape = new[,]

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using Infrastructure.DataModel;
 
 namespace TheGame.EFRepository
@@ -7,6 +8,7 @@ namespace TheGame.EFRepository
     {
         public DbSet<Player> Players { get; set; }
         public DbSet<GameState> GameStates { get; set; }
+        public DbSet<Shape> Shapes { get; set; }
 
         public GameContext() : base("Server = (localdb)\\mssqllocaldb; Database = EfGame; Trusted_Connection = True; ") //"name=myconnectionstring"
         {
@@ -26,11 +28,15 @@ namespace TheGame.EFRepository
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<GameState>();
-                //.HasMany(g => g.DeadBlocks)
-                //.WithOne(d => d.GameState);
+            modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));
 
-            modelBuilder.Entity<Shape>();
+            modelBuilder.Entity<GameState>()
+                .HasMany(g => g.DeadBlocks)
+                .WithRequired(d => d.GameState);
+            //    //.HasMany(g => g.DeadBlocks)
+            //    //.WithOne(d => d.GameState);
+
+            //modelBuilder.Entity<Shape>();
             //    .ToTable("Shapes")
             //    .HasDiscriminator<int>("ShapeType")
             //    .HasValue<ShapeO>(1);

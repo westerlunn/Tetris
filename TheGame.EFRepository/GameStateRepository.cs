@@ -23,7 +23,7 @@ namespace TheGame.EFRepository
 
 
                 //context.GameStates.Update(gameState);
-                //context.SaveChanges();
+                context.SaveChanges();
             }
         }
 

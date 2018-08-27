@@ -11,6 +11,10 @@ namespace Infrastructure.DataModel
         public ShapeColor Color { get; set; }
         public bool IsFilled { get; set; }
 
+        public Block()
+        {
+        }
+
         public Block(int xPosition, int yPosition, ShapeColor color, bool isFilled = true)
         {
             XPosition = xPosition;

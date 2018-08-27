@@ -53,6 +53,30 @@
     <Compile Include="Migrations\201808241418212_FirstMigration.Designer.cs">
       <DependentUpon>201808241418212_FirstMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808241427023_Deadbocks.cs" />
+    <Compile Include="Migrations\201808241427023_Deadbocks.Designer.cs">
+      <DependentUpon>201808241427023_Deadbocks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808261947042_second.cs" />
+    <Compile Include="Migrations\201808261947042_second.Designer.cs">
+      <DependentUpon>201808261947042_second.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808262005346_third.cs" />
+    <Compile Include="Migrations\201808262005346_third.Designer.cs">
+      <DependentUpon>201808262005346_third.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808262018394_fourth.cs" />
+    <Compile Include="Migrations\201808262018394_fourth.Designer.cs">
+      <DependentUpon>201808262018394_fourth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808262037267_fifth.cs" />
+    <Compile Include="Migrations\201808262037267_fifth.Designer.cs">
+      <DependentUpon>201808262037267_fifth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808262051040_sixth.cs" />
+    <Compile Include="Migrations\201808262051040_sixth.Designer.cs">
+      <DependentUpon>201808262051040_sixth.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -69,6 +93,24 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808241418212_FirstMigration.resx">
       <DependentUpon>201808241418212_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808241427023_Deadbocks.resx">
+      <DependentUpon>201808241427023_Deadbocks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808261947042_second.resx">
+      <DependentUpon>201808261947042_second.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808262005346_third.resx">
+      <DependentUpon>201808262005346_third.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808262018394_fourth.resx">
+      <DependentUpon>201808262018394_fourth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808262037267_fifth.resx">
+      <DependentUpon>201808262037267_fifth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808262051040_sixth.resx">
+      <DependentUpon>201808262051040_sixth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

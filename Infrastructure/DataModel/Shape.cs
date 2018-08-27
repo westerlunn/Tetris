@@ -6,11 +6,16 @@ namespace Infrastructure.DataModel
     public abstract class Shape
     {
         protected bool[,] _shape;
-
+        
         public int ShapeId { get; set; }
         public ShapeColor Color { get; }
         public int XPosition { get; set; }
         public int YPosition { get; set; }
+
+        protected Shape()
+        {
+        }
+
         protected Shape(int xPosition, int yPosition, ShapeColor color)
         {
             XPosition = xPosition;
