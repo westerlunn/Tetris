@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using Infrastructure.DataModel;
+using TheGame.EFRepository.Migrations;
 
 namespace TheGame.EFRepository
 {
@@ -33,6 +34,11 @@ namespace TheGame.EFRepository
             modelBuilder.Entity<GameState>()
                 .HasMany(g => g.DeadBlocks)
                 .WithRequired(d => d.GameState);
+                
+                //.HasForeignKey(g => g.GameState.GameStateId);
+
+
+
             //    //.HasMany(g => g.DeadBlocks)
             //    //.WithOne(d => d.GameState);
 

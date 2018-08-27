@@ -5,6 +5,7 @@ namespace Infrastructure.DataModel
     public class Block
     {
         public int BlockId { get; set; }
+        public int GameStateId { get; set; }
         public GameState GameState { get; set; }
         public int XPosition { get; set; }
         public int YPosition { get; set; }
