@@ -36,7 +36,7 @@ namespace TheGame
             _random = new Random();
             //_gameState = GetLatestGameState();
             _repository = repository;
-            //_gameState = _repository.GetAll().OrderByDescending(g => g.GameStateId).FirstOrDefault(); //in med denna igen
+            _gameState = _repository.GetAll().OrderByDescending(g => g.GameStateId).FirstOrDefault(); //in med denna igen
 
             if (_gameState == null)
             {
@@ -404,10 +404,7 @@ namespace TheGame
                 //        return false;
                 //    }
                 //}
-                else
-                {
                     return true;
-                }
             }
                 return true;
         }
@@ -418,6 +415,7 @@ namespace TheGame
             {
                 foreach (var block in _gameState.ActiveShape.GetBlocks())
                 {
+                    block.GameState = _gameState; //La till
                     _gameState.DeadBlocks.Add(block);
                 }
 
@@ -428,7 +426,7 @@ namespace TheGame
 
             GetPointsForBlownRow();
 
-            Update();
+            _repository.Update(_gameState);
 
             //var fullRows = GetFullRows();
             //if (fullRows.Count > 0)

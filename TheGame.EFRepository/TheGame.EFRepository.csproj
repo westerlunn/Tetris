@@ -45,6 +45,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="TetrisUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\TetrisUI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameContext.cs" />
@@ -80,6 +84,30 @@
     <Compile Include="Migrations\201808270746381_seventh.cs" />
     <Compile Include="Migrations\201808270746381_seventh.Designer.cs">
       <DependentUpon>201808270746381_seventh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808280808153_eighth.cs" />
+    <Compile Include="Migrations\201808280808153_eighth.Designer.cs">
+      <DependentUpon>201808280808153_eighth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808280822043_test.cs" />
+    <Compile Include="Migrations\201808280822043_test.Designer.cs">
+      <DependentUpon>201808280822043_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808280824141_backToEighth.cs" />
+    <Compile Include="Migrations\201808280824141_backToEighth.Designer.cs">
+      <DependentUpon>201808280824141_backToEighth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808280855585_testDeadInBlock.cs" />
+    <Compile Include="Migrations\201808280855585_testDeadInBlock.Designer.cs">
+      <DependentUpon>201808280855585_testDeadInBlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808280858057_back.cs" />
+    <Compile Include="Migrations\201808280858057_back.Designer.cs">
+      <DependentUpon>201808280858057_back.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808280905347_testVirtual.cs" />
+    <Compile Include="Migrations\201808280905347_testVirtual.Designer.cs">
+      <DependentUpon>201808280905347_testVirtual.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,6 +146,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808270746381_seventh.resx">
       <DependentUpon>201808270746381_seventh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808280808153_eighth.resx">
+      <DependentUpon>201808280808153_eighth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808280822043_test.resx">
+      <DependentUpon>201808280822043_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808280824141_backToEighth.resx">
+      <DependentUpon>201808280824141_backToEighth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808280855585_testDeadInBlock.resx">
+      <DependentUpon>201808280855585_testDeadInBlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808280858057_back.resx">
+      <DependentUpon>201808280858057_back.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808280905347_testVirtual.resx">
+      <DependentUpon>201808280905347_testVirtual.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
