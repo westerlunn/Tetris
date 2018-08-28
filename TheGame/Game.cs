@@ -36,7 +36,7 @@ namespace TheGame
             _random = new Random();
             //_gameState = GetLatestGameState();
             _repository = repository;
-            _gameState = _repository.GetAll().OrderByDescending(g => g.GameStateId).FirstOrDefault();
+            //_gameState = _repository.GetAll().OrderByDescending(g => g.GameStateId).FirstOrDefault(); //in med denna igen
 
             if (_gameState == null)
             {
@@ -67,17 +67,20 @@ namespace TheGame
 
         protected override void Render(IRender render)
         {
-            if (_gameState.ActiveShape == null) return;
-
-            foreach (var block in _gameState.ActiveShape.GetBlocks())
+            if (_gameState.ActiveShape != null)
             {
-                render.Draw(block.XPosition, block.YPosition, block.Color);
+                foreach (var block in _gameState.ActiveShape.GetBlocks())
+                {
+                    render.Draw(block.XPosition, block.YPosition, block.Color);
+                }
             }
 
             foreach (var block in _gameState.DeadBlocks)
-            {
-                render.Draw(block.XPosition, block.YPosition, block.Color);
-            }
+                {
+                    render.Draw(block.XPosition, block.YPosition, block.Color);
+                }
+
+            
         }
 
 
@@ -300,17 +303,113 @@ namespace TheGame
             return result;
         }
 
-        private void BlowRow(int row)
+        private void BlowRow(List<int> result)
         {
-            _gameState.DeadBlocks.RemoveAll(b => b.YPosition == row);
+            result = result.OrderByDescending(r => r).ToList();
 
+            //foreach (var row in result)
+            //{
+            //    _gameState.DeadBlocks.RemoveAll(b => b.YPosition == row);
+            //}
+
+            for (var i = 0; i < result.Count; i++)
+            {
+                var row = result[i];
+
+                _gameState.DeadBlocks.RemoveAll(b => b.YPosition == row);
+
+                foreach (var block in _gameState.DeadBlocks)
+                {
+                    if (block.YPosition < row)
+                    {
+                        block.YPosition++;
+                    }
+                }
+
+                for (int j = 0; j < result.Count; j++)
+                {
+                    result[j]++;
+                }
+
+            }
+
+            //for (var i = 0; i < result[0]; i++)
+            //{
+            //    foreach (var block in _gameState.DeadBlocks)
+            //    {
+            //        if (block.YPosition < i)
+            //        {
+            //            block.YPosition++;
+            //        }
+            //    }
+            //}
+
+
+            //    for (var row = result[0]; row > result[result.Count - 1]; row--)
+            ////foreach (var row in result)
+            //{
+            //    foreach (var block in _gameState.DeadBlocks)
+            //    {
+            //        if (block.YPosition <= row)
+            //        {
+            //            block.YPosition++;
+            //        }
+            //    }
+            //}
+
+            //foreach (var block in _gameState.DeadBlocks)
+            //{
+            //    while (DeadBlockCanMove())
+            //    {
+            //        block.YPosition++;
+            //    }
+            //}
+
+
+
+
+            //foreach (var block in _gameState.DeadBlocks)
+            //{
+            //    if (block.YPosition < row)
+            //    {
+            //        block.YPosition++;
+            //    }
+            //}
+        }
+        //private void BlowRow(int row)
+        //{
+        //    _gameState.DeadBlocks.RemoveAll(b => b.YPosition == row);
+
+        //    foreach (var block in _gameState.DeadBlocks)
+        //    {
+        //        if (block.YPosition < row)
+        //        {
+        //            block.YPosition++;
+        //        }
+        //    }
+        //}
+
+        public bool DeadBlockCanMove()
+        {
             foreach (var block in _gameState.DeadBlocks)
             {
-                if (block.YPosition < row)
+                if (block.YPosition == 19)
                 {
-                    block.YPosition++;
+                    return false;
+                }
+                //foreach (var deadBlock in _gameState.DeadBlocks)
+                //{
+                //    if (block.YPosition + 1 == deadBlock.YPosition)
+                //    {
+                //        return false;
+                //    }
+                //}
+                else
+                {
+                    return true;
                 }
             }
+                return true;
         }
 
         private void KillShapeGetNewShapeAndBlowRows()
@@ -361,7 +460,8 @@ namespace TheGame
                 {
                     _gameState.Score += 1200;
                 }
-                fullRows.ForEach(BlowRow);
+                //fullRows.ForEach(BlowRow);
+                BlowRow(fullRows);
             }
 
             return _gameState.Score;

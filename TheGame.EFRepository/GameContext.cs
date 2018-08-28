@@ -34,18 +34,22 @@ namespace TheGame.EFRepository
             modelBuilder.Entity<GameState>()
                 .HasMany(g => g.DeadBlocks)
                 .WithRequired(d => d.GameState);
-                
-                //.HasForeignKey(g => g.GameState.GameStateId);
+
+            //.HasForeignKey(g => g.GameState.GameStateId);
 
 
 
             //    //.HasMany(g => g.DeadBlocks)
             //    //.WithOne(d => d.GameState);
 
+            //modelBuilder.Entity<Shape>()
+            //    .ToTable("Shapes")
+            //    .h
+
             //modelBuilder.Entity<Shape>();
             //    .ToTable("Shapes")
-            //    .HasDiscriminator<int>("ShapeType")
-            //    .HasValue<ShapeO>(1);
+                //.HasDiscriminator<int>("ShapeType")
+                //.HasValue<ShapeO>(1);
 
             //modelBuilder.Entity<RotatableShape>()
             //    .ToTable("Shapes")
