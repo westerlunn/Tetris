@@ -36,7 +36,7 @@ namespace TheGame
             _random = new Random();
             //_gameState = GetLatestGameState();
             _repository = repository;
-            _gameState = _repository.GetAll().OrderByDescending(g => g.GameStateId).FirstOrDefault(); //in med denna igen
+            _gameState = _repository.GetAll().OrderByDescending(g => g.Id).FirstOrDefault(); //in med denna igen
 
             if (_gameState == null)
             {
@@ -151,7 +151,7 @@ namespace TheGame
         //        var latestGameState = context.GameStates
         //            .Include(g => g.DeadBlocks)
         //            .Include(g => g.ActiveShape)
-        //            .OrderByDescending(g => g.GameStateId).FirstOrDefault();
+        //            .OrderByDescending(g => g.Id).FirstOrDefault();
         //        _running = true;
         //        return latestGameState;
         //    }

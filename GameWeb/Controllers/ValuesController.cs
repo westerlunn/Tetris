@@ -10,11 +10,23 @@ namespace GameWeb.Controllers
     [Route("api/controller")]
     public class ValuesController : ApiController
     {
-        // GET api/values
+        //// GET api/values
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var result = 1;
+
+            return Json(new
+            {
+                success = true,
+                Message = result
+            });
         }
 
         // GET api/values/5

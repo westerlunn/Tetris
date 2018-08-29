@@ -17,7 +17,7 @@ namespace TheGame.EFRepository
         //{
         //    using (var context = new GameContext())
         //    {
-        //        var entity = context.GameStates.FirstOrDefault(g => g.GameStateId == gameState.GameStateId);
+        //        var entity = context.GameStates.FirstOrDefault(g => g.Id == gameState.Id);
         //        if (entity != null)
         //        {
         //            context.Entry(entity).CurrentValues.SetValues(gameState);
@@ -27,51 +27,63 @@ namespace TheGame.EFRepository
         //    }
         //}
 
-        public void Update(GameState gameState)
-        {
-            try
-            {
-                using (var context = new GameContext())
-                {
-                    var entity = context.GameStates
-                        .Include(g => g.ActiveShape)
-                        .Include(g => g.DeadBlocks)
-                        .Include(g => g.Player)
-                        .FirstOrDefault(g => g.GameStateId == gameState.GameStateId);
-
-                    if (entity != null)
-                    {
-                        entity.ActiveShape = gameState.ActiveShape;
-                        entity.DeadBlocks = gameState.DeadBlocks;//new List<Block>(gameState.DeadBlocks);
-                        entity.Player = gameState.Player;
-                        entity.Score = gameState.Score;
-                        entity.Time = gameState.Time;
-
-                        context.GameStates.AddOrUpdate(entity);
-                    }
-
-                    context.SaveChanges();
-                }
-            }
-            catch (Exception e)
-            {
-
-            }
-        }
-
         //public void Update(GameState gameState)
         //{
-        //    using (var context = new GameContext())
-        //    {
-        //        var entity = context.GameStates
-        //            .Include(g => g.ActiveShape)
-        //            .Include(g => g.DeadBlocks)
-        //            .Include(g => g.Player)
-        //            .FirstOrDefault(g => g.GameStateId == gameState.GameStateId);
+        //        using (var context = new GameContext())
+        //        {
+        //            var entity = context.GameStates
+        //                .Include(g => g.ActiveShape)
+        //                .Include(g => g.DeadBlocks)
+        //                .Include(g => g.Player)
+        //                .FirstOrDefault(g => g.Id == gameState.Id);
 
-        //        var deadBlocks = context.Blocks.Where(b => b.GameState.GameStateId == gameState.GameStateId).ToList();
-        //    }
+        //            if (entity != null)
+        //            {
+        //                entity.ActiveShape = gameState.ActiveShape;
+        //                entity.DeadBlocks = gameState.DeadBlocks;//new List<Block>(gameState.DeadBlocks);
+        //                entity.Player = gameState.Player;
+        //                entity.Score = gameState.Score;
+        //                entity.Time = gameState.Time;
+
+        //                context.GameStates.AddOrUpdate(entity);
+        //            }
+
+        //            context.SaveChanges();
+        //        }
         //}
+
+        public void Update(GameState gameState)
+        {
+            using (var context = new GameContext())
+            {
+                var entity = context.GameStates
+                    .Include(g => g.ActiveShape)
+                    .Include(g => g.DeadBlocks)
+                    .Include(g => g.Player)
+                    .FirstOrDefault(g => g.Id == gameState.Id);
+
+                var deadBlocks = context.Blocks
+                    .Where(b => b.GameState.Id == gameState.Id)
+                    .ToList();
+
+                if (entity != null)
+                {
+                    entity.ActiveShape = gameState.ActiveShape;
+
+                    entity.Player = gameState.Player;
+                    entity.Score = gameState.Score;
+                    entity.Time = gameState.Time;
+
+                    foreach (var block in gameState.DeadBlocks)
+                    {
+                        deadBlocks.Add(block);
+                    }
+                }
+                context.Entry(entity).State = EntityState.Modified;
+
+                context.SaveChanges();
+            }
+        }
 
         public void Save(GameState gameState)
         {
@@ -98,7 +110,7 @@ namespace TheGame.EFRepository
                 return context.GameStates
                     .Include(g => g.DeadBlocks)
                     .Include(g => g.ActiveShape)
-                    .FirstOrDefault(g => g.GameStateId == id);
+                    .FirstOrDefault(g => g.Id == id);
             }
         }
 

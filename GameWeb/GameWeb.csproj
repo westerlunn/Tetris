@@ -277,6 +277,20 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{0af0b62a-970f-4c6b-a5b0-1fe8974f3786}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TheGame.EFRepository\TheGame.EFRepository.csproj">
+      <Project>{43eff961-480f-4d5c-980a-869f926e2166}</Project>
+      <Name>TheGame.EFRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TheGame.Services\TheGame.Services.csproj">
+      <Project>{7468ef34-56e3-41e5-adf5-be5f2be02f3e}</Project>
+      <Name>TheGame.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

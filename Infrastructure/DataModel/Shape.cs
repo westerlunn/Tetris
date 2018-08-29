@@ -7,7 +7,7 @@ namespace Infrastructure.DataModel
     {
         protected bool[,] _shape;
         
-        public int ShapeId { get; set; }
+        public int Id { get; set; }
         public ShapeColor Color { get; }
         public int XPosition { get; set; }
         public int YPosition { get; set; }

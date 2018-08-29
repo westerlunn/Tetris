@@ -53,9 +53,13 @@
   <ItemGroup>
     <Compile Include="GameContext.cs" />
     <Compile Include="GameStateRepository.cs" />
-    <Compile Include="Migrations\201808290924373_First.cs" />
-    <Compile Include="Migrations\201808290924373_First.Designer.cs">
-      <DependentUpon>201808290924373_First.cs</DependentUpon>
+    <Compile Include="Migrations\201808291147028_First.cs" />
+    <Compile Include="Migrations\201808291147028_First.Designer.cs">
+      <DependentUpon>201808291147028_First.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808291151258_Second.cs" />
+    <Compile Include="Migrations\201808291151258_Second.Designer.cs">
+      <DependentUpon>201808291151258_Second.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,8 +75,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201808290924373_First.resx">
-      <DependentUpon>201808290924373_First.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808291147028_First.resx">
+      <DependentUpon>201808291147028_First.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808291151258_Second.resx">
+      <DependentUpon>201808291151258_Second.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
