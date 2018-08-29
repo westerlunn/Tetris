@@ -48,8 +48,8 @@ namespace TheGame.EFRepository
 
             //modelBuilder.Entity<Shape>();
             //    .ToTable("Shapes")
-                //.HasDiscriminator<int>("ShapeType")
-                //.HasValue<ShapeO>(1);
+            //.HasDiscriminator<int>("ShapeType")
+            //.HasValue<ShapeO>(1);
 
             //modelBuilder.Entity<RotatableShape>()
             //    .ToTable("Shapes")
@@ -57,5 +57,22 @@ namespace TheGame.EFRepository
             //    .HasValue<ShapeI>(2)
             //    .HasValue<ShapeJ>(3);
         }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));
+
+        //    modelBuilder.Entity<GameState>()
+        //        .HasOptional(g => g.ActiveShape)
+        //        .WithRequired();
+
+        //    modelBuilder.Entity<Shape>()
+        //        .HasKey(k => k.ShapeId);
+
+        //    modelBuilder.Entity<Block>()
+        //        .HasKey(k => k.BlockId)
+        //        .HasRequired(b => b.GameState)
+        //        .WithMany(g => g.DeadBlocks);
+        //}
     }
 }

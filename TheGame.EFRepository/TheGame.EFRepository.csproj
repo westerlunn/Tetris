@@ -53,61 +53,9 @@
   <ItemGroup>
     <Compile Include="GameContext.cs" />
     <Compile Include="GameStateRepository.cs" />
-    <Compile Include="Migrations\201808241418212_FirstMigration.cs" />
-    <Compile Include="Migrations\201808241418212_FirstMigration.Designer.cs">
-      <DependentUpon>201808241418212_FirstMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808241427023_Deadbocks.cs" />
-    <Compile Include="Migrations\201808241427023_Deadbocks.Designer.cs">
-      <DependentUpon>201808241427023_Deadbocks.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808261947042_second.cs" />
-    <Compile Include="Migrations\201808261947042_second.Designer.cs">
-      <DependentUpon>201808261947042_second.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808262005346_third.cs" />
-    <Compile Include="Migrations\201808262005346_third.Designer.cs">
-      <DependentUpon>201808262005346_third.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808262018394_fourth.cs" />
-    <Compile Include="Migrations\201808262018394_fourth.Designer.cs">
-      <DependentUpon>201808262018394_fourth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808262037267_fifth.cs" />
-    <Compile Include="Migrations\201808262037267_fifth.Designer.cs">
-      <DependentUpon>201808262037267_fifth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808262051040_sixth.cs" />
-    <Compile Include="Migrations\201808262051040_sixth.Designer.cs">
-      <DependentUpon>201808262051040_sixth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808270746381_seventh.cs" />
-    <Compile Include="Migrations\201808270746381_seventh.Designer.cs">
-      <DependentUpon>201808270746381_seventh.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808280808153_eighth.cs" />
-    <Compile Include="Migrations\201808280808153_eighth.Designer.cs">
-      <DependentUpon>201808280808153_eighth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808280822043_test.cs" />
-    <Compile Include="Migrations\201808280822043_test.Designer.cs">
-      <DependentUpon>201808280822043_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808280824141_backToEighth.cs" />
-    <Compile Include="Migrations\201808280824141_backToEighth.Designer.cs">
-      <DependentUpon>201808280824141_backToEighth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808280855585_testDeadInBlock.cs" />
-    <Compile Include="Migrations\201808280855585_testDeadInBlock.Designer.cs">
-      <DependentUpon>201808280855585_testDeadInBlock.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808280858057_back.cs" />
-    <Compile Include="Migrations\201808280858057_back.Designer.cs">
-      <DependentUpon>201808280858057_back.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808280905347_testVirtual.cs" />
-    <Compile Include="Migrations\201808280905347_testVirtual.Designer.cs">
-      <DependentUpon>201808280905347_testVirtual.cs</DependentUpon>
+    <Compile Include="Migrations\201808290924373_First.cs" />
+    <Compile Include="Migrations\201808290924373_First.Designer.cs">
+      <DependentUpon>201808290924373_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,47 +71,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201808241418212_FirstMigration.resx">
-      <DependentUpon>201808241418212_FirstMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808241427023_Deadbocks.resx">
-      <DependentUpon>201808241427023_Deadbocks.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808261947042_second.resx">
-      <DependentUpon>201808261947042_second.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808262005346_third.resx">
-      <DependentUpon>201808262005346_third.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808262018394_fourth.resx">
-      <DependentUpon>201808262018394_fourth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808262037267_fifth.resx">
-      <DependentUpon>201808262037267_fifth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808262051040_sixth.resx">
-      <DependentUpon>201808262051040_sixth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808270746381_seventh.resx">
-      <DependentUpon>201808270746381_seventh.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808280808153_eighth.resx">
-      <DependentUpon>201808280808153_eighth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808280822043_test.resx">
-      <DependentUpon>201808280822043_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808280824141_backToEighth.resx">
-      <DependentUpon>201808280824141_backToEighth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808280855585_testDeadInBlock.resx">
-      <DependentUpon>201808280855585_testDeadInBlock.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808280858057_back.resx">
-      <DependentUpon>201808280858057_back.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808280905347_testVirtual.resx">
-      <DependentUpon>201808280905347_testVirtual.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808290924373_First.resx">
+      <DependentUpon>201808290924373_First.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -29,14 +29,8 @@ namespace TheGame.EFRepository
 
         public void Update(GameState gameState)
         {
-            var l = new List<Block>()
+            try
             {
-                new Block(6, 7, ShapeColor.Blue),
-                new Block(8, 13, ShapeColor.Blue)
-
-            };
-            //try
-            //{
                 using (var context = new GameContext())
                 {
                     var entity = context.GameStates
@@ -48,21 +42,36 @@ namespace TheGame.EFRepository
                     if (entity != null)
                     {
                         entity.ActiveShape = gameState.ActiveShape;
-                        entity.DeadBlocks = new List<Block>(gameState.DeadBlocks);
+                        entity.DeadBlocks = gameState.DeadBlocks;//new List<Block>(gameState.DeadBlocks);
                         entity.Player = gameState.Player;
                         entity.Score = gameState.Score;
                         entity.Time = gameState.Time;
+
+                        context.GameStates.AddOrUpdate(entity);
                     }
 
                     context.SaveChanges();
                 }
-            //}
-            //catch (Exception e)
-            //{
+            }
+            catch (Exception e)
+            {
 
-            //}
-
+            }
         }
+
+        //public void Update(GameState gameState)
+        //{
+        //    using (var context = new GameContext())
+        //    {
+        //        var entity = context.GameStates
+        //            .Include(g => g.ActiveShape)
+        //            .Include(g => g.DeadBlocks)
+        //            .Include(g => g.Player)
+        //            .FirstOrDefault(g => g.GameStateId == gameState.GameStateId);
+
+        //        var deadBlocks = context.Blocks.Where(b => b.GameState.GameStateId == gameState.GameStateId).ToList();
+        //    }
+        //}
 
         public void Save(GameState gameState)
         {
