@@ -4,10 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using TheGame.EFRepository;
 
 namespace GameWeb.Controllers
 {
-    [Route("api/controller")]
+    //[Route("api/controller")]
     public class ValuesController : ApiController
     {
         //// GET api/values
@@ -17,10 +18,12 @@ namespace GameWeb.Controllers
         //    return new string[] { "value1", "value2" };
         //}
 
-        [HttpGet]
+        //[HttpGet]
         public IHttpActionResult Get()
         {
-            var result = 1;
+            var repository = new GameStateRepository();
+            var result = repository.GetById(2);
+            //var result = 1;
 
             return Json(new
             {
@@ -30,10 +33,18 @@ namespace GameWeb.Controllers
         }
 
         // GET api/values/5
-        [HttpGet]
-        public string Get(int id)
+        
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            var repository = new GameStateRepository();
+            var result = repository.GetById(id);
+            //var result = 1;
+
+            return Json(new
+            {
+                success = true,
+                Message = result
+            });
         }
 
         // POST api/values
