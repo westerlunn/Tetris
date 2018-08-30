@@ -10,7 +10,7 @@ namespace Infrastructure.DataModel
         {
         }
 
-        protected RotatableShape(int xPosition, int yPosition, ShapeColor color, ShapeRotation rotation = ShapeRotation.Zero) : base(xPosition, yPosition, color)
+        protected RotatableShape(int xPosition, int yPosition, ShapeRotation rotation = ShapeRotation.Zero) : base(xPosition, yPosition)
         {
             Rotation = rotation;
         }

@@ -37,6 +37,7 @@ namespace TheGame
             //_gameState = GetLatestGameState();
             _repository = repository;
             _gameState = _repository.GetAll().OrderByDescending(g => g.Id).FirstOrDefault(); //in med denna igen
+            _running = true;
 
             if (_gameState == null)
             {
@@ -123,7 +124,6 @@ namespace TheGame
         {
             _gameState = new GameState();
             _repository.Save(_gameState);
-            _running = true;
         }
 
         //private void SaveGameState()
@@ -415,7 +415,7 @@ namespace TheGame
             {
                 foreach (var block in _gameState.ActiveShape.GetBlocks())
                 {
-                    block.GameState = _gameState; //La till
+                    //block.GameState = _gameState; //La till
                     _gameState.DeadBlocks.Add(block);
                 }
 

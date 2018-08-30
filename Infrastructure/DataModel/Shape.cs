@@ -6,9 +6,10 @@ namespace Infrastructure.DataModel
     public abstract class Shape
     {
         protected bool[,] _shape;
+        protected ShapeColor _color;
         
         public int Id { get; set; }
-        public ShapeColor Color { get; }
+        public ShapeColor Color => _color;
         public int XPosition { get; set; }
         public int YPosition { get; set; }
 
@@ -16,11 +17,10 @@ namespace Infrastructure.DataModel
         {
         }
 
-        protected Shape(int xPosition, int yPosition, ShapeColor color)
+        protected Shape(int xPosition, int yPosition)
         {
             XPosition = xPosition;
             YPosition = yPosition;
-            Color = color;
         }
 
 

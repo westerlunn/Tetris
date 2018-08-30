@@ -8,46 +8,47 @@ namespace TheGame.EFRepository.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Blocks",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        GameStateId = c.Int(nullable: false),
-                        XPosition = c.Int(nullable: false),
-                        YPosition = c.Int(nullable: false),
-                        Color = c.Int(nullable: false),
-                        IsFilled = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.GameStates", t => t.GameStateId, cascadeDelete: true)
-                .Index(t => t.GameStateId);
-            
-            CreateTable(
                 "dbo.GameStates",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Time = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         Score = c.Long(nullable: false),
+                        ActiveShape_Id = c.Int(),
                         Player_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Shapes", t => t.ActiveShape_Id)
                 .ForeignKey("dbo.Players", t => t.Player_Id)
+                .Index(t => t.ActiveShape_Id)
                 .Index(t => t.Player_Id);
             
             CreateTable(
                 "dbo.Shapes",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         XPosition = c.Int(nullable: false),
                         YPosition = c.Int(nullable: false),
                         Rotation = c.Int(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Blocks",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        XPosition = c.Int(nullable: false),
+                        YPosition = c.Int(nullable: false),
+                        Color = c.Int(nullable: false),
+                        IsFilled = c.Boolean(nullable: false),
+                        GameState_Id = c.Int(),
+                    })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.GameStates", t => t.Id)
-                .Index(t => t.Id);
+                .ForeignKey("dbo.GameStates", t => t.GameState_Id)
+                .Index(t => t.GameState_Id);
             
             CreateTable(
                 "dbo.Players",
@@ -64,16 +65,16 @@ namespace TheGame.EFRepository.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Blocks", "GameStateId", "dbo.GameStates");
             DropForeignKey("dbo.GameStates", "Player_Id", "dbo.Players");
-            DropForeignKey("dbo.Shapes", "Id", "dbo.GameStates");
-            DropIndex("dbo.Shapes", new[] { "Id" });
+            DropForeignKey("dbo.Blocks", "GameState_Id", "dbo.GameStates");
+            DropForeignKey("dbo.GameStates", "ActiveShape_Id", "dbo.Shapes");
+            DropIndex("dbo.Blocks", new[] { "GameState_Id" });
             DropIndex("dbo.GameStates", new[] { "Player_Id" });
-            DropIndex("dbo.Blocks", new[] { "GameStateId" });
+            DropIndex("dbo.GameStates", new[] { "ActiveShape_Id" });
             DropTable("dbo.Players");
+            DropTable("dbo.Blocks");
             DropTable("dbo.Shapes");
             DropTable("dbo.GameStates");
-            DropTable("dbo.Blocks");
         }
     }
 }

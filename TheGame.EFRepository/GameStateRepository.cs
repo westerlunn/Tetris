@@ -27,31 +27,6 @@ namespace TheGame.EFRepository
         //    }
         //}
 
-        //public void Update(GameState gameState)
-        //{
-        //        using (var context = new GameContext())
-        //        {
-        //            var entity = context.GameStates
-        //                .Include(g => g.ActiveShape)
-        //                .Include(g => g.DeadBlocks)
-        //                .Include(g => g.Player)
-        //                .FirstOrDefault(g => g.Id == gameState.Id);
-
-        //            if (entity != null)
-        //            {
-        //                entity.ActiveShape = gameState.ActiveShape;
-        //                entity.DeadBlocks = gameState.DeadBlocks;//new List<Block>(gameState.DeadBlocks);
-        //                entity.Player = gameState.Player;
-        //                entity.Score = gameState.Score;
-        //                entity.Time = gameState.Time;
-
-        //                context.GameStates.AddOrUpdate(entity);
-        //            }
-
-        //            context.SaveChanges();
-        //        }
-        //}
-
         public void Update(GameState gameState)
         {
             using (var context = new GameContext())
@@ -62,28 +37,55 @@ namespace TheGame.EFRepository
                     .Include(g => g.Player)
                     .FirstOrDefault(g => g.Id == gameState.Id);
 
-                var deadBlocks = context.Blocks
-                    .Where(b => b.GameState.Id == gameState.Id)
-                    .ToList();
-
                 if (entity != null)
                 {
                     entity.ActiveShape = gameState.ActiveShape;
-
+                    entity.DeadBlocks = gameState.DeadBlocks;//new List<Block>(gameState.DeadBlocks);
                     entity.Player = gameState.Player;
                     entity.Score = gameState.Score;
                     entity.Time = gameState.Time;
 
-                    foreach (var block in gameState.DeadBlocks)
-                    {
-                        deadBlocks.Add(block);
-                    }
+                    context.Entry(entity).State = EntityState.Modified;
+                    context.SaveChanges();
+                    //context.GameStates.AddOrUpdate(entity);
                 }
-                context.Entry(entity).State = EntityState.Modified;
 
-                context.SaveChanges();
+                //context.SaveChanges();
             }
         }
+
+        //public void Update(GameState gameState)
+        //{
+        //    using (var context = new GameContext())
+        //    {
+        //        var entity = context.GameStates
+        //            .Include(g => g.ActiveShape)
+        //            .Include(g => g.DeadBlocks)
+        //            .Include(g => g.Player)
+        //            .FirstOrDefault(g => g.Id == gameState.Id);
+
+        //        var deadBlocks = context.Blocks
+        //            .Where(b => b.GameState.Id == gameState.Id)
+        //            .ToList();
+
+        //        if (entity != null)
+        //        {
+        //            entity.ActiveShape = gameState.ActiveShape;
+
+        //            entity.Player = gameState.Player;
+        //            entity.Score = gameState.Score;
+        //            entity.Time = gameState.Time;
+
+        //            foreach (var block in gameState.DeadBlocks)
+        //            {
+        //                deadBlocks.Add(block);
+        //            }
+        //        }
+        //        context.Entry(entity).State = EntityState.Modified;
+
+        //        context.SaveChanges();
+        //    }
+        //}
 
         public void Save(GameState gameState)
         {

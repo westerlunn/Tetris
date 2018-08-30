@@ -4,13 +4,9 @@ namespace Infrastructure.DataModel
 {
     public class ShapeI : RotatableShape
     {
-        private const ShapeColor _color = ShapeColor.Cyan;
+        //private const ShapeColor _color = ShapeColor.Cyan;
 
         public ShapeI()
-        {
-        }
-
-        public ShapeI(int xPosition, int yPosition, ShapeRotation rotation = ShapeRotation.Zero) : base(xPosition, yPosition, _color, rotation)
         {
             _shape = new[,]
             {
@@ -19,6 +15,21 @@ namespace Infrastructure.DataModel
                 {false, false, false, false},
                 {false, false, false, false}
             };
+
+            _color = ShapeColor.Cyan;
+        }
+
+        public ShapeI(int xPosition, int yPosition, ShapeRotation rotation = ShapeRotation.Zero) : base(xPosition, yPosition, rotation)
+        {
+            _shape = new[,]
+            {
+                {false, false, false, false},
+                {true, true, true, true},
+                {false, false, false, false},
+                {false, false, false, false}
+            };
+
+            _color = ShapeColor.Cyan;
         }
 
         //private bool[,] _shapeI0 = 

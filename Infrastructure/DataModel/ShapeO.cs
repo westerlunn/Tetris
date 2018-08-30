@@ -4,19 +4,28 @@ namespace Infrastructure.DataModel
 {
     public class ShapeO : Shape
     {
-        private const ShapeColor _color = ShapeColor.Yellow;
+        //private const ShapeColor _color = ShapeColor.Yellow;
 
         public ShapeO()
-        {
-        }
-
-        public ShapeO(int xPosition, int yPosition) : base(xPosition, yPosition, _color)
         {
             _shape = new[,]
             {
                 {true, true},
                 {true, true}
             };
+
+            _color = ShapeColor.Yellow;
+        }
+
+        public ShapeO(int xPosition, int yPosition) : base(xPosition, yPosition)
+        {
+            _shape = new[,]
+            {
+                {true, true},
+                {true, true}
+            };
+
+            _color = ShapeColor.Yellow;
         }
 
         //private bool[,] _shapeO =
