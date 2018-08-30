@@ -34,7 +34,7 @@ namespace GameWeb.Controllers
 
         // GET api/values/5
         
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get(int id) //api/values/2
         {
             var repository = new GameStateRepository();
             var result = repository.GetById(id);
