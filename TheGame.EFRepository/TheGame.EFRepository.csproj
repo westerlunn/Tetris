@@ -57,6 +57,18 @@
     <Compile Include="Migrations\201808301419198_First.Designer.cs">
       <DependentUpon>201808301419198_First.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809041108279_Second.cs" />
+    <Compile Include="Migrations\201809041108279_Second.Designer.cs">
+      <DependentUpon>201809041108279_Second.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809041139014_Third.cs" />
+    <Compile Include="Migrations\201809041139014_Third.Designer.cs">
+      <DependentUpon>201809041139014_Third.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809041342584_Fourth.cs" />
+    <Compile Include="Migrations\201809041342584_Fourth.Designer.cs">
+      <DependentUpon>201809041342584_Fourth.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,6 +85,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808301419198_First.resx">
       <DependentUpon>201808301419198_First.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809041108279_Second.resx">
+      <DependentUpon>201809041108279_Second.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809041139014_Third.resx">
+      <DependentUpon>201809041139014_Third.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809041342584_Fourth.resx">
+      <DependentUpon>201809041342584_Fourth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

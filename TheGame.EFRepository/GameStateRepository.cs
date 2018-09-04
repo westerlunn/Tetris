@@ -40,18 +40,24 @@ namespace TheGame.EFRepository
                 if (entity != null)
                 {
                     entity.ActiveShape = gameState.ActiveShape;
-                    entity.DeadBlocks = gameState.DeadBlocks;//new List<Block>(gameState.DeadBlocks);
+                    entity.DeadBlocks = new List<Block>(gameState.DeadBlocks);
                     entity.Player = gameState.Player;
                     entity.Score = gameState.Score;
                     entity.Time = gameState.Time;
 
                     context.Entry(entity).State = EntityState.Modified;
                     context.SaveChanges();
+
+                    DeleteBlocksWithIdNull(context);
                     //context.GameStates.AddOrUpdate(entity);
                 }
-
                 //context.SaveChanges();
             }
+        }
+
+        public void DeleteBlocksWithIdNull(GameContext context)
+        {
+            context.Database.ExecuteSqlCommand("DELETE FROM Blocks WHERE GameState_Id IS NULL");
         }
 
         //public void Update(GameState gameState)

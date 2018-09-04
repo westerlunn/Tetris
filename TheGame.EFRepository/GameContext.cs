@@ -57,6 +57,12 @@ namespace TheGame.EFRepository
             //    .HasDiscriminator<int>("ShapeType")
             //    .HasValue<ShapeI>(2)
             //    .HasValue<ShapeJ>(3);
+
+            ////test enl. tuben
+            //modelBuilder.Entity<Block>()
+            //    .HasRequired<GameState>(b => b.GameState)
+            //    .WithMany(b => b.DeadBlocks)
+            //    .HasForeignKey(b => b.GameStateId);
         }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
