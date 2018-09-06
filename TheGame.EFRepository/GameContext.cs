@@ -32,38 +32,59 @@ namespace TheGame.EFRepository
         {
             modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));
 
-            //modelBuilder.Entity<GameState>()
-            //    .HasMany(g => g.DeadBlocks)
-            //    .WithRequired(d => d.GameState);
+            modelBuilder.Entity<GameState>()
+                .HasKey(k => k.Id)
+                .HasMany(g => g.DeadBlocks)
+                .WithRequired()
+                .WillCascadeOnDelete();
 
-            //.HasForeignKey(g => g.GameState.Id);
+            modelBuilder.Entity<GameState>()
+                .HasOptional(g => g.ActiveShape)
+                .WithRequired();
 
+            modelBuilder.Entity<Shape>()
+                .HasKey(k => k.Id);
 
-
-            //    //.HasMany(g => g.DeadBlocks)
-            //    //.WithOne(d => d.GameState);
-
-            //modelBuilder.Entity<Shape>()
-            //    .ToTable("Shapes")
-            //    .h
-
-            //modelBuilder.Entity<Shape>();
-            //    .ToTable("Shapes")
-            //.HasDiscriminator<int>("ShapeType")
-            //.HasValue<ShapeO>(1);
-
-            //modelBuilder.Entity<RotatableShape>()
-            //    .ToTable("Shapes")
-            //    .HasDiscriminator<int>("ShapeType")
-            //    .HasValue<ShapeI>(2)
-            //    .HasValue<ShapeJ>(3);
-
-            ////test enl. tuben
-            //modelBuilder.Entity<Block>()
-            //    .HasRequired<GameState>(b => b.GameState)
-            //    .WithMany(b => b.DeadBlocks)
-            //    .HasForeignKey(b => b.GameStateId);
+            modelBuilder.Entity<Block>()
+                .HasKey(k => k.Id);
         }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));
+
+        //    //modelBuilder.Entity<GameState>()
+        //    //    .HasMany(g => g.DeadBlocks)
+        //    //    .WithRequired(d => d.GameState);
+
+        //    //.HasForeignKey(g => g.GameState.Id);
+
+
+
+        //    //    //.HasMany(g => g.DeadBlocks)
+        //    //    //.WithOne(d => d.GameState);
+
+        //    //modelBuilder.Entity<Shape>()
+        //    //    .ToTable("Shapes")
+        //    //    .h
+
+        //    //modelBuilder.Entity<Shape>();
+        //    //    .ToTable("Shapes")
+        //    //.HasDiscriminator<int>("ShapeType")
+        //    //.HasValue<ShapeO>(1);
+
+        //    //modelBuilder.Entity<RotatableShape>()
+        //    //    .ToTable("Shapes")
+        //    //    .HasDiscriminator<int>("ShapeType")
+        //    //    .HasValue<ShapeI>(2)
+        //    //    .HasValue<ShapeJ>(3);
+
+        //    ////test enl. tuben
+        //    //modelBuilder.Entity<Block>()
+        //    //    .HasRequired<GameState>(b => b.GameState)
+        //    //    .WithMany(b => b.DeadBlocks)
+        //    //    .HasForeignKey(b => b.GameStateId);
+        //}
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{

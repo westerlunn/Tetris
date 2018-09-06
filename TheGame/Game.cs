@@ -424,9 +424,12 @@ namespace TheGame
 
             IsGameOver();
 
+
             GetPointsForBlownRow();
 
-            _repository.Update(_gameState);
+
+            //_repository.Update(_gameState); //TODO Flytta ner, ta bort?
+
 
             //var fullRows = GetFullRows();
             //if (fullRows.Count > 0)

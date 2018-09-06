@@ -13,7 +13,7 @@ namespace TheGame.EFRepository.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201808301419198_First"; }
+            get { return "201809051103596_First"; }
         }
         
         string IMigrationMetadata.Source

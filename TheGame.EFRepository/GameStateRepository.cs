@@ -40,20 +40,98 @@ namespace TheGame.EFRepository
                 if (entity != null)
                 {
                     entity.ActiveShape = gameState.ActiveShape;
-                    entity.DeadBlocks = new List<Block>(gameState.DeadBlocks);
                     entity.Player = gameState.Player;
                     entity.Score = gameState.Score;
                     entity.Time = gameState.Time;
 
-                    context.Entry(entity).State = EntityState.Modified;
-                    context.SaveChanges();
-
-                    DeleteBlocksWithIdNull(context);
-                    //context.GameStates.AddOrUpdate(entity);
+                    foreach (var block in gameState.DeadBlocks)
+                    {
+                        if (entity.DeadBlocks.All(d => d.Id != block.Id))
+                        {
+                            entity.DeadBlocks.Add(block);
+                        }
+                    }
                 }
-                //context.SaveChanges();
+
+                var name = gameState.ActiveShape.GetType().Name;
+                if (entity.ActiveShape.Id > 0)
+                {
+                    var command = $@"UPDATE Shapes SET Discriminator = '{name}' WHERE Id = {entity.ActiveShape.Id}";
+                    context.Database.ExecuteSqlCommand(command);
+                }
+
+                context.SaveChanges();
+
+                RemoveBlownDeadBlocks(gameState);
+
+
+                foreach (var block in entity.DeadBlocks)
+                {
+                    var block2 = gameState.DeadBlocks.SingleOrDefault(d => d.Id == block.Id);
+                    if (block2 != null)
+                    {
+                        block.YPosition = block2.YPosition;
+                    }
+                }
             }
         }
+
+        public void RemoveBlownDeadBlocks(GameState gameState)
+        {
+            using (var context = new GameContext())
+            {
+                var entity = context.GameStates
+                    .Include(g => g.ActiveShape)
+                    .Include(g => g.DeadBlocks)
+                    .Include(g => g.Player)
+                    .FirstOrDefault(g => g.Id == gameState.Id);
+
+                if (entity != null)
+                {
+                    var list = entity.DeadBlocks.Except(gameState.DeadBlocks);
+
+                    if (list.Any())
+                    {
+                        foreach (var block in list.ToList())
+                        {
+                            context.Entry(block).State = EntityState.Deleted;
+                            //entity.DeadBlocks.Remove(block);
+                        }
+                        //string asd = null;
+                    }
+                }
+
+                context.SaveChanges();
+            }
+        }
+
+        //public void Update(GameState gameState)
+        //{
+        //    using (var context = new GameContext())
+        //    {
+        //        var entity = context.GameStates
+        //            .Include(g => g.ActiveShape)
+        //            .Include(g => g.DeadBlocks)
+        //            .Include(g => g.Player)
+        //            .FirstOrDefault(g => g.Id == gameState.Id);
+
+        //        if (entity != null)
+        //        {
+        //            entity.ActiveShape = gameState.ActiveShape;
+        //            entity.DeadBlocks = new List<Block>(gameState.DeadBlocks);
+        //            entity.Player = gameState.Player;
+        //            entity.Score = gameState.Score;
+        //            entity.Time = gameState.Time;
+
+        //            context.Entry(entity).State = EntityState.Modified;
+        //            context.SaveChanges();
+
+        //            DeleteBlocksWithIdNull(context);
+        //            //context.GameStates.AddOrUpdate(entity);
+        //        }
+        //        //context.SaveChanges();
+        //    }
+        //}
 
         public void DeleteBlocksWithIdNull(GameContext context)
         {
