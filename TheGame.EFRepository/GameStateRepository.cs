@@ -73,6 +73,8 @@ namespace TheGame.EFRepository
                         block.YPosition = block2.YPosition;
                     }
                 }
+
+                context.SaveChanges();
             }
         }
 
